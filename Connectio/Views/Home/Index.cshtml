@@ -1,5 +1,5 @@
-﻿@model HomeViewModel
+﻿@model IEnumerable<PostModel>
 
-@foreach(var post in Model.Posts){
+@foreach(var post in Model){
     <partial name="_PostCard" model="post" />
 }

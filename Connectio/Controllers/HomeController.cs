@@ -1,5 +1,4 @@
-﻿using Connectio.ViewModels;
-using Connectio.ViewModels.Post;
+﻿using Connectio.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.Controllers
@@ -8,13 +7,13 @@ namespace Connectio.Controllers
     {
         public IActionResult Index()
         {
-            var posts = new List<PostReadViewModel>
+            var posts = new List<PostModel>
             {
-                new PostReadViewModel(1, "Hello, world"),
-                new PostReadViewModel(2, "How are you doint?"),
-                new PostReadViewModel(3, "Great!")
+                new PostModel(){Id=1, Text="Hi!"},
+                new PostModel(){Id=2, Text="How are you?"},
+                new PostModel(){Id=3, Text="Great!"}
             };
-            return View(new HomeViewModel(posts));
+            return View(posts);
         }
     }
 }
