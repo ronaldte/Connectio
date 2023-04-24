@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Connectio.Models
 {
-    public class ConnectioDbContext : DbContext
+    public class ConnectioDbContext : IdentityDbContext
     {
         public ConnectioDbContext(DbContextOptions<ConnectioDbContext> options) : base(options)
         {  

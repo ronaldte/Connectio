@@ -17,6 +17,9 @@
                             Connectio
                         </div>
                     </div>
+                    <div>
+                        <partial name="_LoginPartial" />
+                    </div>
                 </nav>
             </div>
         </div>
@@ -46,8 +49,10 @@
             </div>
         </div>
 
+        <div></div>
     </div>
 
+    @RenderSection("Scripts", required: false);
 
 </body>
 </html>
