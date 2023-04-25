@@ -1,6 +1,7 @@
 using Connectio.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Connectio.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,8 @@ builder.Services.AddDbContext<ConnectioDbContext>(options =>
 });
 
 builder.Services.AddDefaultIdentity<IdentityUser>()
-    .AddEntityFrameworkStores<ConnectioDbContext>();
+    .AddEntityFrameworkStores<ConnectioDbContext>()
+    .AddSignInManager<EmailSignInManager>();
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = false;
