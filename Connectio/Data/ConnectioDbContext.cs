@@ -10,6 +10,6 @@ namespace Connectio.Data
         {
         }
 
-        public DbSet<PostModel> Posts { get; set; }
+        public DbSet<Post> Posts { get; set; }
     }
 }
