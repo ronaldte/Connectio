@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Connectio.Data
 {
-    public class ConnectioDbContext : IdentityDbContext
+    public class ConnectioDbContext : IdentityDbContext<ApplicationUser>
     {
         public ConnectioDbContext(DbContextOptions<ConnectioDbContext> options) : base(options)
         {
