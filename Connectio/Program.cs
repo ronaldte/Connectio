@@ -13,9 +13,14 @@ builder.Services.AddDbContext<ConnectioDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectioDbContextConnection") ?? throw new InvalidOperationException("\"Connection string 'ConnectioDbContextConnection' not found.\""));
 });
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.User.RequireUniqueEmail = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    options.User.RequireUniqueEmail = true;
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+})
     .AddEntityFrameworkStores<ConnectioDbContext>()
     .AddSignInManager<EmailSignInManager>();
+
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = false;
