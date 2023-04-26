@@ -11,28 +11,23 @@
 <form class="space-y-6" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
     <div asp-validation-summary="ModelOnly" class="text-red-500" role="alert"></div>
     <div>
-        <label asp-for="Input.DisplayName" class="block mb-2 text-sm font-medium text-gray-900">Your display name</label>
-        <input asp-for="Input.DisplayName" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="display-name" aria-required="true" placeholder="display name">
+        <input asp-for="Input.DisplayName" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="display-name" aria-required="true" placeholder="Display name">
         <span asp-validation-for="Input.DisplayName" class="text-red-500"></span>
     </div>
     <div>
-        <label asp-for="Input.UserName" class="block mb-2 text-sm font-medium text-gray-900">Your user name</label>
-        <input asp-for="Input.UserName" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="user-name" aria-required="true" placeholder="username">
+        <input asp-for="Input.UserName" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="user-name" aria-required="true" placeholder="Username">
         <span asp-validation-for="Input.UserName" class="text-red-500"></span>
     </div>
     <div>
-        <label asp-for="Input.Email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-        <input asp-for="Input.Email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="user-name" aria-required="true" placeholder="name@example.com">
+        <input asp-for="Input.Email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="user-name" aria-required="true" placeholder="Email">
         <span asp-validation-for="Input.Email" class="text-red-500"></span>
     </div>
     <div>
-        <label asp-for="Input.Password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-        <input asp-for="Input.Password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="new-password" aria-required="true" placeholder="password">
+        <input asp-for="Input.Password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="new-password" aria-required="true" placeholder="Password">
         <span asp-validation-for="Input.Password" class="text-red-500"></span>
     </div>
     <div>
-        <label asp-for="Input.ConfirmPassword" class="block mb-2 text-sm font-medium text-gray-900">Confirm Password</label>
-        <input asp-for="Input.ConfirmPassword" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="new-password" aria-required="true" placeholder="password">
+        <input asp-for="Input.ConfirmPassword" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="new-password" aria-required="true" placeholder="Verify password">
         <span asp-validation-for="Input.ConfirmPassword" class="text-red-500"></span>
     </div>
 

@@ -12,13 +12,11 @@
 <form class="space-y-6" itemid="account" method="post">
     <div asp-validation-summary="ModelOnly" class="text-red-500" role="alert"></div>
     <div>
-        <label asp-for="Input.Email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-        <input asp-for="Input.Email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="username" placeholder="name@example.com" aria-required="true">
-        <span asp-validation-for="Input.Email" class="text-red-500"></span>
+        <input asp-for="Input.EmailOrUserName" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="username" placeholder="Email or username" aria-required="true">
+        <span asp-validation-for="Input.EmailOrUserName" class="text-red-500"></span>
     </div>
     <div>
-        <label asp-for="Input.Password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-        <input asp-for="Input.Password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="current-password" aria-required="true" placeholder="password">
+        <input asp-for="Input.Password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="current-password" aria-required="true" placeholder="Password">
         <span asp-validation-for="Input.Password" class="text-red-500"></span>
     </div>
     <div class="flex items-center justify-between">

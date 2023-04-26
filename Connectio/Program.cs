@@ -19,7 +19,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 })
     .AddEntityFrameworkStores<ConnectioDbContext>()
-    .AddSignInManager<EmailSignInManager>();
+    .AddSignInManager<EmailOrUserNameSignInManager>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
