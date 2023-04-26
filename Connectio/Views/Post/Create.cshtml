@@ -1,0 +1,25 @@
+﻿@model Post
+
+<div id="new_post" class="w-full mb-4 rounded-xl bg-white p-5 shadow scroll-mt-16">
+    <div class="flex justify-between">
+        <img class="block max-w-[50px] max-h-[50px] w-auto h-auto rounded-lg mr-3" src="https://picsum.photos/600/600" alt="">
+        <div class="w-full my-auto">
+            <form asp-action="Create"> 
+                <div asp-validation-summary="ModelOnly" class="text-red-500" role="alert"></div>
+                <input asp-for="@Model.Text" class="w-full p-3 mb-2" type="text" placeholder="What's on your mind?">
+                <div class="flex justify-between pl-3">
+                    <div class="my-auto">
+                        <ul class="flex">
+                            <li class="mr-2 text-xl"><a class="hover:text-orange-400" href=""><i class="bi bi-card-image"></i></a></li>
+                            <li class="mr-2 text-xl"><a class="hover:text-orange-400" href=""><i class="bi bi-filetype-gif"></i></a></li>
+                            <li class="mr-2 text-xl"><a class="hover:text-orange-400" href=""><i class="bi bi-bar-chart-line"></i></a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <button id="login-submit" type="submit" class="rounded-full bg-orange-400 px-3 py-2 w-32 font-semibold text-white hover:bg-orange-500">Post</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
