@@ -1,7 +1,7 @@
-using Connectio.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Connectio.Areas.Identity;
+using Connectio.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
