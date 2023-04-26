@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Connectio.Areas.Identity;
 using Connectio.Data;
+using Connectio.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ builder.Services.AddDbContext<ConnectioDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectioDbContextConnection") ?? throw new InvalidOperationException("\"Connection string 'ConnectioDbContextConnection' not found.\""));
 });
 
-builder.Services.AddDefaultIdentity<IdentityUser>()
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.User.RequireUniqueEmail = true)
     .AddEntityFrameworkStores<ConnectioDbContext>()
     .AddSignInManager<EmailSignInManager>();
 builder.Services.Configure<IdentityOptions>(options =>
