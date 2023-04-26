@@ -31,6 +31,8 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 0;
 });
 
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+
 var app = builder.Build();
 
 
