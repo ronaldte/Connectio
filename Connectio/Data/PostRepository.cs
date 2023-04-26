@@ -1,4 +1,5 @@
 ﻿using Connectio.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Connectio.Data
 {
@@ -19,12 +20,12 @@ namespace Connectio.Data
 
         public IEnumerable<Post> GetAllPosts()
         {
-            return _dbContext.Posts;
+            return _dbContext.Posts.Include(p => p.User);
         }
 
         public Post? GetPostById(int postId)
         {
-            return _dbContext.Posts.Where(p => p.Id == postId).FirstOrDefault();
+            return _dbContext.Posts.Include(p => p.User).Where(p => p.Id == postId).FirstOrDefault();
         }
     }
 }

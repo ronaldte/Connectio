@@ -6,8 +6,8 @@
         <div class="w-full flex">
             <img class="block max-w-[50px] max-h-[50px] w-auto h-auto rounded-lg my-auto mr-3" src="https://picsum.photos/600/600" alt="">
             <div class="my-auto">
-                <div><span class="font-bold text-lg">Ronald </span><i class="bi bi-patch-check-fill text-orange-400 align-top ml-1"></i></div>
-                <div class="text-sm text-gray-600"><span>@@ronald</span><i class="bi bi-dot"></i><span>2h</span></div>
+                <div><span class="font-bold text-lg">@Model.User.DisplayName </span><i class="bi bi-patch-check-fill text-orange-400 align-top ml-1"></i></div>
+                <div class="text-sm text-gray-600"><span>@Model.User.UserName</span><i class="bi bi-dot"></i><span>@Model.Created</span></div>
             </div>
         </div>
 
