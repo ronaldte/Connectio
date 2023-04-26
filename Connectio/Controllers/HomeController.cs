@@ -1,18 +1,20 @@
-﻿using Connectio.Models;
+﻿using Connectio.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IPostRepository _postRepository;
+
+        public HomeController(IPostRepository postRepository)
+        {
+            _postRepository = postRepository;
+        }
+
         public IActionResult Index()
         {
-            var posts = new List<Post>
-            {
-                new Post(){Id=1, Text="Hi!"},
-                new Post(){Id=2, Text="How are you?"},
-                new Post(){Id=3, Text="Great!"}
-            };
+            var posts = _postRepository.GetAllPosts();
             return View(posts);
         }
     }
