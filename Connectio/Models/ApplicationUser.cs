@@ -11,5 +11,6 @@ namespace Connectio.Models
         public bool Protected { get; set; } = false;
         public bool Verified { get; set; } = false;
         public DateTime Created { get; set; }
+        public ICollection<Post>? Posts { get; set; }
     }
 }

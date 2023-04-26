@@ -10,5 +10,8 @@ namespace Connectio.Models
         public string Text { get; set; } = string.Empty;
 
         public DateTime Created { get; set; }
+
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
