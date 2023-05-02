@@ -1,21 +1,23 @@
 ﻿@model Post
 
+
 <div class="w-full mb-4 rounded-xl bg-white p-5 shadow">
     <div>
         <!-- Header -->
         <div class="w-full flex">
             <img class="block max-w-[50px] max-h-[50px] w-auto h-auto rounded-lg my-auto mr-3" src="https://picsum.photos/600/600" alt="">
-            <div class="my-auto">
-                <div><span class="font-bold text-lg">@Model.User.DisplayName </span><i class="bi bi-patch-check-fill text-orange-400 align-top ml-1"></i></div>
+            <div>
+                <div><span class="font-semibold">@Model.User.DisplayName </span><i class="bi bi-patch-check-fill text-orange-400 align-[.125rem] ml-1"></i></div>
                 <div class="text-sm text-gray-600"><span>@Model.User.UserName</span><i class="bi bi-dot"></i><span>@Model.Created</span></div>
             </div>
         </div>
-
         <!-- Content -->
-        <div class="w-full rounded-lg my-4">
-            <!-- <img class="mx-auto" src="https://picsum.photos/500/500" alt=""> -->
-            <div>@Model.Text</div>
-        </div>
+        <a asp-controller="Post" asp-action="Index" asp-route-id="@Model.Id">
+            <div class="w-full rounded-lg my-4 hover:bg-gray-100 hover:rounded">
+                <!-- <img class="mx-auto" src="https://picsum.photos/500/500" alt=""> -->
+                <div>@Model.Text</div>
+            </div>
+        </a>
 
         <!-- Footer -->
         <div class="w-full mx-auto">
