@@ -1,0 +1,41 @@
+﻿@model ReadUserViewModel
+
+<div class="w-full bg-white rounded-lg shadow">
+    <img class="object-cover h-56 w-full rounded-t-lg" src="https://picsum.photos/1600/600" alt="">
+    <div class="flex justify-between">
+        <img class="block max-w-[180px] max-h-[180px] w-auto h-auto rounded-lg my-auto border-solid border-4 border-white -mt-24 ml-5" src="https://picsum.photos/600/600" alt="">
+        <div class="my-auto mr-5">
+            <button class="rounded-full bg-orange-400 p-3 w-40 font-semibold text-white hover:bg-orange-500">Follow</button>
+        </div>
+    </div>
+    <div class="w-full p-5 space-y-4">
+        <!-- header -->
+        <div>
+            <div><span class="font-bold text-lg">@Model.DisplayName </span><i class="bi bi-patch-check-fill text-orange-400 align-top ml-1"></i></div>
+            <div class="text-sm text-gray-600"><span>@Model.UserName</span></div>
+        </div>
+
+        <!-- bio -->
+        <div>
+            <p class="font-normal">
+                @Model.Description
+            </p>
+        </div>
+
+        <!-- links -->
+        <div class="text-gray-500 text-base">
+            <span class="pr-3 leading-5"><i class="bi bi-briefcase align-top p-1"></i>Not Implemented</span>
+            <span class="pr-3 leading-5"><i class="bi bi-geo-alt align-top p-1"></i>@Model.Location</span>
+            <span class="pr-3 leading-5"><i class="bi bi-link-45deg align-top p-1"></i><a class="hover:underline text-blue-400" href="@Model.Url">@Model.Url</a></span>
+            <span class="leading-5"><i class="bi bi-calendar align-top p-1"></i>@Model.Created</span>
+        </div>
+
+        <!-- stats -->
+        <div>
+            <ul class="flex justify-start">
+                <li><a class="hover:underline" href="#"><span class="font-bold">87</span> Following</a></li>
+                <li><a class="hover:underline pl-2" href="#"> <span class="font-bold">35.9K</span> Followers</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

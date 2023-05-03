@@ -32,6 +32,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
@@ -49,8 +50,20 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapDefaultControllerRoute();
+app.MapControllerRoute(
+    name: "Post",
+    pattern: "{controller=Post}/{action=Index}/{id:int}"
+);
 
+app.MapControllerRoute(
+    name: "User",
+    pattern: "{controller=User}/{action=Index}/{username}"
+);
+
+app.MapControllerRoute(
+    name: "Home",
+    pattern: "{controller=Home}/{action=Index}"
+);
 app.MapRazorPages();
 
 app.Run();
