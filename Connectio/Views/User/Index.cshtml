@@ -1,12 +1,29 @@
 ﻿@model ReadUserViewModel
 
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 <div class="w-full bg-white rounded-lg shadow">
     <img class="object-cover h-56 w-full rounded-t-lg" src="https://picsum.photos/1600/600" alt="">
     <div class="flex justify-between">
         <img class="block max-w-[180px] max-h-[180px] w-auto h-auto rounded-lg my-auto border-solid border-4 border-white -mt-24 ml-5" src="https://picsum.photos/600/600" alt="">
-        <div class="my-auto mr-5">
-            <button class="rounded-full bg-orange-400 p-3 w-40 font-semibold text-white hover:bg-orange-500">Follow</button>
-        </div>
+        
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="my-auto mr-5">
+
+            @if(UserManager.GetUserName(User) == Model.UserName)
+            {
+                <button class="rounded-full bg-orange-400 p-3 w-40 font-semibold text-white hover:bg-orange-500">Edit</button>
+            }
+            else
+            {
+                <button class="rounded-full bg-orange-400 p-3 w-40 font-semibold text-white hover:bg-orange-500">Follow</button>
+            }
+            
+            </div>
+        }
+       
     </div>
     <div class="w-full p-5 space-y-4">
         <!-- header -->
