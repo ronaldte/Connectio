@@ -15,7 +15,7 @@ namespace Connectio.Controllers
 
         public IActionResult Index()
         {
-            var posts = _postRepository.GetAllPosts();
+            var posts = _postRepository.GetAllPosts().OrderByDescending(p => p.Created);
             var postsViewModel = new List<ReadPostViewModel>();
 
             foreach (var post in posts)
