@@ -25,19 +25,19 @@ namespace Connectio.ViewModels
 
             if (timeDifference.TotalDays > 365)
             {
-                response = $"{timeDifference.Days / 365}y ago";
+                response = created.ToString("MMM yyyy");
             }
             else if (timeDifference.TotalHours > 24)
             {
-                response = $"{timeDifference.Days}d ago";
+                response = created.ToString("dd MMM");
             }
             else if(timeDifference.TotalHours > 1)
             {
-                response = $"{timeDifference.Hours}h ago";
+                response = $"{timeDifference.Hours}h";
             }
             else if( timeDifference.TotalMinutes > 1)
             {
-                response = $"{timeDifference.Minutes}m ago";
+                response = $"{timeDifference.Minutes}m";
             }
             else
             {
