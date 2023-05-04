@@ -11,7 +11,13 @@
     <div class="w-full p-5 space-y-4">
         <!-- header -->
         <div>
-            <div><span class="font-bold text-lg">@Model.DisplayName </span><i class="bi bi-patch-check-fill text-orange-400 align-top ml-1"></i></div>
+            <div>
+                <span class="font-bold text-lg">@Model.DisplayName </span>
+                @if (Model.Verified)
+                {
+                    <i class="bi bi-patch-check-fill text-orange-400 align-top ml-1"></i>
+                }
+            </div>
             <div class="text-sm text-gray-600"><span>@Model.UserName</span></div>
         </div>
 
@@ -23,11 +29,24 @@
         </div>
 
         <!-- links -->
-        <div class="text-gray-500 text-base">
-            <span class="pr-3 leading-5"><i class="bi bi-briefcase align-top p-1"></i>Not Implemented</span>
-            <span class="pr-3 leading-5"><i class="bi bi-geo-alt align-top p-1"></i>@Model.Location</span>
-            <span class="pr-3 leading-5"><i class="bi bi-link-45deg align-top p-1"></i><a class="hover:underline text-blue-400" href="@Model.Url">@Model.Url</a></span>
-            <span class="leading-5"><i class="bi bi-calendar align-top p-1"></i>@Model.Created</span>
+        <div class="text-gray-500 text-base">            
+            <span class="pr-3 leading-5 hidden"><i class="bi bi-briefcase align-top p-1"></i>Not Implemented</span>
+            
+            @if(Model.Location != null)
+            {
+                <span class="pr-3 leading-5"><i class="bi bi-geo-alt align-top p-1"></i>@Model.Location</span>    
+            }
+
+            @if (Model.Url != null)
+            {
+                <span class="pr-3 leading-5"><i class="bi bi-link-45deg align-top p-1"></i><a class="hover:underline text-blue-400" href="@Model.Url">@Model.Url</a></span>
+            }
+
+            @if (Model.Created != null)
+            {
+                <span class="leading-5"><i class="bi bi-calendar align-top p-1"></i>Joined @Model.Created</span>
+            }
+            
         </div>
 
         <!-- stats -->
