@@ -1,4 +1,5 @@
 ﻿using Connectio.Data;
+using Connectio.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.Controllers
@@ -15,7 +16,14 @@ namespace Connectio.Controllers
         public IActionResult Index()
         {
             var posts = _postRepository.GetAllPosts();
-            return View(posts);
+            var postsViewModel = new List<ReadPostViewModel>();
+
+            foreach (var post in posts)
+            {
+                postsViewModel.Add(new ReadPostViewModel(post));
+            }
+
+            return View(postsViewModel);
         }
     }
 }

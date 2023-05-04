@@ -21,7 +21,13 @@ namespace Connectio.Controllers
         public IActionResult Index(int id)
         {
             var post = _postRepository.GetPostById(id);
-            return View(post);
+            if(post == null)
+            {
+                return NotFound();
+            }
+
+            var postViewModel = new ReadPostViewModel(post);
+            return View(postViewModel);
         }
         
         [Authorize]
