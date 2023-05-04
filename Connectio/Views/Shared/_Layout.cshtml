@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -30,15 +33,27 @@
         <div>
             <div class="fixed mt-5 pr-5 w-[275px]">
                 <ul class="ml-3 font-semibold text-gray-500 text-lg">
-                    <li class="mb-5 font-bold text-orange-400"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" asp-controller="Home" asp-action="Index"><i class="pr-5 bi bi-house"></i>Home</a></li>
-                    <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-hash"></i>Explore</a></li>
-                    <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-bell"></i>Notifications</a></li>
-                    <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-envelope"></i>Messages</a></li>
-                    <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-bookmark"></i>Bookmarks</a></li>
-                    <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-person"></i>Profile</a></li>
-                    <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-three-dots"></i>More</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="mb-5 font-bold text-orange-400"><a asp-controller="Home" asp-action="Index"  class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3"><i class="pr-5 bi bi-house"></i>Home</a></li>
+                    }
+                    
+                    <li class="mb-5"><a asp-controller="Home" asp-action="Index" class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3"><i class="pr-5 bi bi-hash"></i>Explore</a></li>
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-bell"></i>Notifications</a></li>
+                        <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-envelope"></i>Messages</a></li>
+                        <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-bookmark"></i>Bookmarks</a></li>
+                        <li class="mb-5"><a asp-controller="User" asp-action="Index" asp-route-username="@UserManager.GetUserName(User)" class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3"><i class="pr-5 bi bi-person"></i>Profile</a></li>
+                        <li class="mb-5"><a asp-area="Identity" asp-page="/Account/Manage/Index" class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3"><i class="pr-5 bi bi-gear"></i>Settings</a></li>    
+                    }
                 </ul>
-                <a href="#new_post" class="block rounded-full bg-orange-400 p-3 w-full mt-5 font-semibold text-center text-white hover:bg-orange-500"><i class="bi bi-pen"></i> Compose</a>
+                
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a asp-controller="Post" asp-action="Create" class="block rounded-full bg-orange-400 p-3 w-full mt-5 font-semibold text-center text-white hover:bg-orange-500"><i class="bi bi-pen"></i> Compose</a>
+                }
             </div>
         </div>
 
