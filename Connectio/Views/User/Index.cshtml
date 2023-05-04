@@ -3,7 +3,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<div class="w-full bg-white rounded-lg shadow">
+<div class="w-full bg-white rounded-lg shadow mb-4">
     <img class="object-cover h-56 w-full rounded-t-lg" src="https://picsum.photos/1600/600" alt="">
     <div class="flex justify-between">
         <img class="block max-w-[180px] max-h-[180px] w-auto h-auto rounded-lg my-auto border-solid border-4 border-white -mt-24 ml-5" src="https://picsum.photos/600/600" alt="">
@@ -35,7 +35,7 @@
                     <i class="bi bi-patch-check-fill text-orange-400 align-top ml-1"></i>
                 }
             </div>
-            <div class="text-sm text-gray-600"><span>@Model.UserName</span></div>
+            <div class="text-sm text-gray-600"><span>@@@Model.UserName</span></div>
         </div>
 
         <!-- bio -->
@@ -75,3 +75,8 @@
         </div>
     </div>
 </div>
+
+@foreach (var post in Model.Posts)
+{
+    <partial name="_PostCard" model="post" />
+}

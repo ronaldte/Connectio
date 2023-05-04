@@ -23,6 +23,11 @@ namespace Connectio.Data
             return _dbContext.Posts.Include(p => p.User);
         }
 
+        public IEnumerable<Post> GetAllPostsByUser(string username)
+        {
+            return _dbContext.Posts.Where(p => p.User.UserName == username).Include(p => p.User);
+        }
+
         public Post? GetPostById(int postId)
         {
             return _dbContext.Posts.Include(p => p.User).Where(p => p.Id == postId).FirstOrDefault();

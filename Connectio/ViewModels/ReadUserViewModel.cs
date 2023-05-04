@@ -12,12 +12,13 @@ namespace Connectio.ViewModels
         public bool Protected { get; set; } = false;
         public bool Verified { get; set; } = false;
         public string Created { get; set; } = string.Empty;
+        public List<ReadPostViewModel> Posts { get; set; } = new();
 
         public ReadUserViewModel()
         {
             
         }
-        public ReadUserViewModel(ApplicationUser user)
+        public ReadUserViewModel(ApplicationUser user, List<ReadPostViewModel> posts)
         {
             UserName = user.UserName;
             DisplayName = user.DisplayName;
@@ -27,6 +28,7 @@ namespace Connectio.ViewModels
             Protected = user.Protected;
             Verified = user.Verified;
             Created = user.Created.ToString("Y");
+            Posts = posts;
         }
     }
 }
