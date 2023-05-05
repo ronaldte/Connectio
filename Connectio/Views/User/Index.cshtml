@@ -14,7 +14,7 @@
 
             @if(UserManager.GetUserName(User) == Model.UserName)
             {
-                <button class="rounded-full bg-orange-400 p-3 w-40 font-semibold text-white hover:bg-orange-500">Edit</button>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" class="block rounded-full bg-orange-400 p-3 w-40 font-semibold text-white text-center hover:bg-orange-500">Edit</a>
             }
             else
             {
