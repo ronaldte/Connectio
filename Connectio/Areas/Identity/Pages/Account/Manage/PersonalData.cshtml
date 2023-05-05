@@ -4,21 +4,17 @@
     ViewData["Title"] = "Personal Data";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
-
-<h3>@ViewData["Title"]</h3>
-
-<div class="row">
-    <div class="col-md-6">
-        <p>Your account contains personal data that you have given us. This page allows you to download or delete that data.</p>
-        <p>
-            <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
-        </p>
+<div class="space-y-4">
+    <div class="border-b border-gray-200 space-y-3 pb-5">
+        <p class="text-gray-500">Your account contains personal data that you have given us. This page allows you to download or delete that data.</p>
         <form id="download-data" asp-page="DownloadPersonalData" method="post">
-            <button class="btn btn-primary" type="submit">Download</button>
+            <button class="block w-32 border border-gray-500 rounded-full px-3 py-1 font-semibold text-center text-gray-500 hover:border-gray-500 hover:text-white hover:bg-gray-500" type="submit">Download</button>
         </form>
-        <p>
-            <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger">Delete</a>
-        </p>
+    </div>
+        
+    <div class="space-y-3">
+        <span class="font-semibold">Deleting this data will permanently remove your account, and this cannot be recovered.</span>
+        <a id="delete" asp-page="DeletePersonalData" class="block w-32 border border-red-500 rounded-full px-3 py-1 font-semibold text-center text-red-500 hover:border-red-500 hover:text-white hover:bg-red-500">Delete</a>
     </div>
 </div>
 

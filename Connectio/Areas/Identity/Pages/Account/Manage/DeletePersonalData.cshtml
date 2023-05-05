@@ -5,9 +5,7 @@
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
 
-<h3>@ViewData["Title"]</h3>
-
-<div class="alert alert-warning" role="alert">
+<div class="text-red-500" role="alert">
     <p>
         <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
     </p>
@@ -15,16 +13,17 @@
 
 <div>
     <form id="delete-user" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+        <div asp-validation-summary="ModelOnly" class="text-red-500" role="alert"></div>
         @if (Model.RequirePassword)
         {
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Please enter your password." />
-                <label asp-for="Input.Password" class="form-label"></label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <div class="mt-3">
+                <input asp-for="Input.Password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" autocomplete="current-password" aria-required="true" placeholder="Please enter your password." />
+                <span asp-validation-for="Input.Password" class="text-red-500"></span>
             </div>
         }
-        <button class="w-100 btn btn-lg btn-danger" type="submit">Delete data and close my account</button>
+        <div class="mt-3">
+            <button class="block border border-red-500 rounded-full px-3 py-1 font-semibold text-center text-red-500 hover:border-red-500 hover:text-white hover:bg-red-500" type="submit">Delete data and close my account</button>
+        </div>
     </form>
 </div>
 

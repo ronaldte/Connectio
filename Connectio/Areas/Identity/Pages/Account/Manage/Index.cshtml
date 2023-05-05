@@ -5,24 +5,42 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
-                <label asp-for="Username" class="form-label"></label>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-        </form>
-    </div>
+<div>
+    <form class="space-y-4" id="profile-form" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-red-500" role="alert"></div>
+        <div>
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 cursor-not-allowed" placeholder="Please choose your username." disabled />
+        </div>
+        <div>
+            <label asp-for="Input.DisplayName"></label>
+            <input asp-for="Input.DisplayName" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Please enter your display name." />
+            <span asp-validation-for="Input.DisplayName" class="text-red-500"></span>
+        </div>
+        <div>
+            <label asp-for="Input.PhoneNumber"></label>
+            <input asp-for="Input.PhoneNumber" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Please enter your phone number." />
+            <span asp-validation-for="Input.PhoneNumber" class="text-red-500"></span>
+        </div>
+        <div>
+            <label asp-for="Input.Url"></label>
+            <input asp-for="Input.Url" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Please enter your url." />
+            <span asp-validation-for="Input.Url" class="text-red-500"></span>
+        </div>
+        <div>
+            <label asp-for="Input.Location"></label>
+            <input asp-for="Input.Location" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Please enter your location." />
+            <span asp-validation-for="Input.Location" class="text-red-500"></span>
+        </div>
+        <div>
+            <label asp-for="Input.Description"></label>
+            <input asp-for="Input.Description" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Please enter your description." />
+            <span asp-validation-for="Input.Description" class="text-red-500"></span>
+        </div>
+
+        <button id="update-profile-button" type="submit" class="block w-32 border border-gray-500 rounded-full px-3 py-1 font-semibold text-center text-gray-500 hover:border-gray-500 hover:text-white hover:bg-gray-500">Save</button>
+    </form>
 </div>
 
 @section Scripts {

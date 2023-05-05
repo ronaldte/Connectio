@@ -1,14 +1,17 @@
-﻿@inject SignInManager<ApplicationUser> SignInManager
-@{
-    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
-}
-<ul class="nav nav-pills flex-column">
-    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
-    @if (hasExternalLogins)
-    {
-        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
-    }
-    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
-</ul>
+﻿
+<div class="font-medium text-center text-gray-500 border-b border-gray-200 mb-4">
+    <ul class="flex flex-wrap -mb-px">
+        <li class="mr-2">
+            <a asp-page="./Index" class="@ManageNavPages.IndexNavClass(ViewContext) inline-block px-4 pb-2 border-b-2 rounded-t-lg">Profile</a>
+        </li>
+        <li class="mr-2">
+            <a asp-page="./Email" class="@ManageNavPages.EmailNavClass(ViewContext) inline-block px-4 pb-2 border-b-2 rounded-t-lg ">Email</a>
+        </li>
+        <li class="mr-2">
+            <a asp-page="./ChangePassword" class="@ManageNavPages.ChangePasswordNavClass(ViewContext) inline-block px-4 pb-2 border-b-2 rounded-t-lg">Password</a>
+        </li>
+        <li class="mr-2">
+            <a asp-page="./PersonalData" class="@ManageNavPages.PersonalDataNavClass(ViewContext) inline-block px-4 pb-2 border-b-2  rounded-t-lg">Personal data</a>
+        </li>
+    </ul>
+</div>

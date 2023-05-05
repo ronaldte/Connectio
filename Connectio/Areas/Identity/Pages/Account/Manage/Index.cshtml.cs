@@ -52,6 +52,23 @@ namespace Connectio.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Display name")]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+            public string DisplayName { get; set; }
+
+            [Display(Name = "Location")]
+            [StringLength(50, ErrorMessage = "The {0} must be be at max {1} characters long.")]
+            public string Location { get; set; }
+            
+            [Display(Name = "Url")]
+            [StringLength(160, ErrorMessage = "The {0} must be be at max {1} characters long.")]
+            public string Url { get; set; }
+
+            [Display(Name = "Description")]
+            [StringLength(160, ErrorMessage = "The {0} must be be at max {1} characters long.")]
+            public string Description { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -70,7 +87,11 @@ namespace Connectio.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                DisplayName = user.DisplayName,
+                Location = user.Location,
+                Url = user.Url,
+                Description = user.Description
             };
         }
 
@@ -110,6 +131,29 @@ namespace Connectio.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+            if (Input.DisplayName != user.DisplayName)
+            {
+                user.DisplayName = Input.DisplayName;
+            }
+
+            if(Input.Location != user.Location)
+            {
+                user.Location = Input.Location;
+            }
+
+            if(Input.Url != user.Url)
+            {
+                user.Url = Input.Url;
+            }
+
+            if(Input.Description != user.Description)
+            {
+                user.Description = Input.Description;
+            }
+
+            await _userManager.UpdateSecurityStampAsync(user);
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
