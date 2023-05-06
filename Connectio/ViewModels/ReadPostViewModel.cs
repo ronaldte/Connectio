@@ -29,7 +29,7 @@ namespace Connectio.ViewModels
             }
             else if (timeDifference.TotalHours > 24)
             {
-                response = created.ToString("dd MMM");
+                response = created.ToString("d MMM");
             }
             else if(timeDifference.TotalHours > 1)
             {
