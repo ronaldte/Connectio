@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<ReadPostViewModel>
 
+@{
+    ViewData["ActiveNavigationPage"] = ActiveNavigationPage.Home;
+}
+
 @foreach(var post in Model){
     <partial name="_PostCard" model="post" />
 }

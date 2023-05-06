@@ -3,6 +3,10 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
+@{
+    ViewData["ActiveNavigationPage"] = ActiveNavigationPage.Profile;
+}
+
 <div class="w-full bg-white rounded-lg shadow mb-4">
     <img class="object-cover h-56 w-full rounded-t-lg" src="https://picsum.photos/1600/600" alt="">
     <div class="flex justify-between">
