@@ -4,6 +4,7 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
+    ViewData["Title"] = $"{Model.DisplayName} (@{Model.UserName}) / Connectio";
     ViewData["ActiveNavigationPage"] = ActiveNavigationPage.Profile;
 }
 

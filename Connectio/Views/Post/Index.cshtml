@@ -1,3 +1,7 @@
 ﻿@model ReadPostViewModel
 
+@{
+    ViewData["Title"] = $"{Model.User.DisplayName} on Connectio: {Model.Text} / Connectio";
+}
+
 <partial name="_PostCard" model="@Model"/>
