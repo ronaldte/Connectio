@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Connectio.Models
 {
@@ -11,6 +12,8 @@ namespace Connectio.Models
         public bool Protected { get; set; } = false;
         public bool Verified { get; set; } = false;
         public DateTime Created { get; set; }
-        public ICollection<Post>? Posts { get; set; }
+        public List<Post> Posts { get; set; } = new();
+        public List<Post> BookmarkedPosts { get; set; } = new();
+        public List<Bookmark> Bookmarks { get; set; } = new();
     }
 }
