@@ -30,7 +30,12 @@ namespace Connectio.Data
 
         public Post? GetPostById(int postId)
         {
-            return _dbContext.Posts.Include(p => p.User).Where(p => p.Id == postId).FirstOrDefault();
+            return _dbContext.Posts
+                .Where(p => p.Id == postId)
+                .Include(p => p.User)
+                .Include(p => p.LikedBy)
+                .Include(p => p.BookmarkedBy)
+                .FirstOrDefault();
         }
     }
 }
