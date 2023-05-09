@@ -21,6 +21,19 @@ namespace Connectio.Controllers
             _userManager = userManager;
         }
 
+        public IActionResult DisplayPostLikes(int postId)
+        {
+            var post = _postRepository.GetPostById(postId);
+            if(post == null)
+            {
+                return NotFound();
+            }
+
+            var likedBy = new ReadPostLikesViewModel(post.LikedBy, post);
+            
+            return View(likedBy);
+        }
+
         public async Task<IActionResult> UserBookmarks()
         {
             var user = await _userManager.GetUserAsync(User);
