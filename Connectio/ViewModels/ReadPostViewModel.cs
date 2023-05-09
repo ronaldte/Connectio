@@ -8,6 +8,7 @@ namespace Connectio.ViewModels
         public string Text { get; set; } = string.Empty;
         public string Created { get; set; }
         public ApplicationUser User { get; set; }
+        public string? Header { get; set; } = null;
 
         public ReadPostViewModel(Post post)
         {
@@ -15,6 +16,11 @@ namespace Connectio.ViewModels
             Text = post.Text;
             Created = CalculateAge(post.Created);
             User = post.User;
+        }
+
+        public ReadPostViewModel(Post post, string header) : this(post)
+        {
+            Header = header;
         }
 
         private static string CalculateAge(DateTime created)
