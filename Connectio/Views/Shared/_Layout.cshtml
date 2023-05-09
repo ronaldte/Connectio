@@ -48,7 +48,7 @@
                     {
                         <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-bell"></i>Notifications</a></li>
                         <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-envelope"></i>Messages</a></li>
-                        <li class="mb-5"><a class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3" href=""><i class="pr-5 bi bi-bookmark"></i>Bookmarks</a></li>
+                        <li class="mb-5 @ActiveNavigationPage.BookmarksActivePage(ViewContext)"><a asp-controller="Reaction" asp-action="UserBookmarks" class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3"><i class="pr-5 bi bi-bookmark"></i>Bookmarks</a></li>
                         <li class="mb-5 @ActiveNavigationPage.ProfileActivePage(ViewContext)"><a asp-controller="User" asp-action="Index" asp-route-username="@UserManager.GetUserName(User)" class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3"><i class="pr-5 bi bi-person"></i>Profile</a></li>
                         <li class="mb-5 @ActiveNavigationPage.SettingsActivePage(ViewContext)"><a asp-area="Identity" asp-page="/Account/Manage/Index" class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3"><i class="pr-5 bi bi-gear"></i>Settings</a></li>    
                     }
