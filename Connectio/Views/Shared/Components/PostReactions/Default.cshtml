@@ -2,7 +2,7 @@
 
 
 <div class="w-full mx-auto">
-    <ul class="flex justify-start leading-5">
+    <ul class="flex justify-between leading-5">
         <li><span class="hover:font-bold mr-16"><a href="#"><i class="bi bi-chat p-1"></i><span class="text-sm">98</span></a></span></li>
         <li><span class="hover:font-bold mr-16"><a href="#"><i class="bi bi-arrow-repeat p-1"></i><span class="text-sm">13</span></a></span></li>
         
@@ -11,7 +11,8 @@
             var formData = new ReadReactionFormViewModel(
                 reactionAction: "DeleteLike", 
                 reactionIcon: "bi bi-heart-fill p-1 text-red-500", 
-                reactionCount: Model.LikedCount, 
+                reactionCount: Model.LikedCount,
+                reactionType: "Like",
                 postId: Model.PostId, 
                 displayCount: true
             );
@@ -22,8 +23,9 @@
         {
             var formData = new ReadReactionFormViewModel(
                 reactionAction: "CreateLike",
-                reactionIcon: "bi bi-heart p-1",
+                reactionIcon: "bi bi-heart p-1 text-red-500",
                 reactionCount: Model.LikedCount,
+                reactionType: "Like",
                 postId: Model.PostId,
                 displayCount: true
             );
@@ -37,6 +39,7 @@
                 reactionAction: "DeleteBookmark",
                 reactionIcon: "bi bi-bookmark-fill text-green-500 p-1",
                 reactionCount: Model.BookmarkedCount,
+                reactionType: "Bookmark",
                 postId: Model.PostId,
                 displayCount: true
             );
@@ -47,8 +50,9 @@
         {
             var formData = new ReadReactionFormViewModel(
                 reactionAction: "CreateBookmark",
-                reactionIcon: "bi bi-bookmark p-1",
+                reactionIcon: "bi bi-bookmark p-1 text-green-500",
                 reactionCount: Model.BookmarkedCount,
+                reactionType: "Bookmark",
                 postId: Model.PostId,
                 displayCount: true
             );
