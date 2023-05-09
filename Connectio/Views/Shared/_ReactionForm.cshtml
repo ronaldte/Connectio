@@ -1,0 +1,13 @@
+﻿@model ReadReactionFormViewModel
+
+<li>
+    <form id="likeForm" method="post" asp-controller="Reaction" asp-action="@Model.ReactionAction" asp-route-postId="@Model.PostId">
+        <button class="mr-16" type="submit">
+            <i class="@Model.ReactionIcon"></i>
+            @if (Model.DisplayCount && Model.ReactionCount > 0)
+            {
+                <span class="text-sm">@Model.ReactionCount</span>        
+            }
+        </button>
+    </form>
+</li>
