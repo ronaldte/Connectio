@@ -74,5 +74,46 @@ namespace Connectio.Controllers
             _reactionRepository.DeleteBookmark(bookmark);
             return RedirectToAction("UserBookmarks");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateLike(int postId)
+        {
+            var post = _postRepository.GetPostById(postId);
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null || post == null)
+            {
+                return NotFound();
+            }
+
+            var like = new Like()
+            {
+                User = user,
+                Post = post
+            };
+            _reactionRepository.CreateLike(like);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteLike(int postId)
+        {
+            var post = _postRepository.GetPostById(postId);
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null || post == null)
+            {
+                return NotFound();
+            }
+
+            var like = _reactionRepository.GetLike(user, post);
+            if (like == null)
+            {
+                return NotFound();
+            }
+
+            _reactionRepository.DeleteLike(like);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
