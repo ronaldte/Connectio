@@ -5,10 +5,24 @@
     <ul class="flex justify-start leading-5">
         <li><span class="hover:font-bold mr-16"><a href="#"><i class="bi bi-chat p-1"></i><span class="text-sm">98</span></a></span></li>
         <li><span class="hover:font-bold mr-16"><a href="#"><i class="bi bi-arrow-repeat p-1"></i><span class="text-sm">13</span></a></span></li>
-        <li><span class="hover:font-bold mr-16"><a href="#"><i class="bi bi-heart p-1"></i><span class="text-sm">18</span></a></span></li>
-        @*<li><span class="hover:font-bold mr-16"><a href="#"><i class="bi bi-bookmark p-1"></i><span class="text-sm">2</span></a></span></li>*@
+        
+        @if (Model.Liked)
+        {
+            <li>
+                <form id="likeForm" method="post" asp-controller="Reaction" asp-action="DeleteLike" asp-route-postId="@Model.PostId">
+                    <button id="like" class="hover:font-bold mr-16" type="submit"><i class="bi bi-heart-fill p-1 text-red-500"></i></button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li>
+                <form id="likeForm" method="post" asp-controller="Reaction" asp-action="CreateLike" asp-route-postId="@Model.PostId">
+                    <button id="like" class="hover:font-bold mr-16" type="submit"><i class="bi bi-heart p-1"></i></button>
+                </form>
+            </li>
+        }
 
-        @*asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"*@
         @if (Model.Bookmarked)
         {
             <li>
