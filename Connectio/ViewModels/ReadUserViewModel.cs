@@ -14,11 +14,7 @@ namespace Connectio.ViewModels
         public string Created { get; set; } = string.Empty;
         public List<ReadPostViewModel> Posts { get; set; } = new();
 
-        public ReadUserViewModel()
-        {
-            
-        }
-        public ReadUserViewModel(ApplicationUser user, List<ReadPostViewModel> posts)
+        public ReadUserViewModel(ApplicationUser user)
         {
             UserName = user.UserName;
             DisplayName = user.DisplayName;
@@ -28,6 +24,9 @@ namespace Connectio.ViewModels
             Protected = user.Protected;
             Verified = user.Verified;
             Created = user.Created.ToString("Y");
+        }
+        public ReadUserViewModel(ApplicationUser user, List<ReadPostViewModel> posts) : this(user)
+        {
             Posts = posts;
         }
     }
