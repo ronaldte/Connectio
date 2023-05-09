@@ -22,12 +22,15 @@ namespace Connectio.Data
                 .WithMany(e => e.Posts)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
-            
             builder.Entity<Post>()
                 .HasMany(e => e.BookmarkedBy)
                 .WithMany(e => e.BookmarkedPosts)
                 .UsingEntity<Bookmark>(j => j.Property(e => e.Created).HasDefaultValueSql("GETUTCDATE()"));
-                
+
+            builder.Entity<Post>()
+                .HasMany(e => e.LikedBy)
+                .WithMany(e => e.LikedPosts)
+                .UsingEntity<Like>(j => j.Property(e => e.Created).HasDefaultValueSql("GETUTCDATE()"));
         }
     }
 }

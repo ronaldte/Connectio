@@ -15,5 +15,8 @@ namespace Connectio.Models
 
         public List<ApplicationUser> BookmarkedBy { get; set; } = new();
         public List<Bookmark> Bookmarks { get; set; } = new();
+
+        public List<ApplicationUser> LikedBy { get; set; } = new();
+        public List<Like> Likes { get; set; } = new();
     }
 }

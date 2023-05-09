@@ -15,5 +15,8 @@ namespace Connectio.Models
         public List<Post> Posts { get; set; } = new();
         public List<Post> BookmarkedPosts { get; set; } = new();
         public List<Bookmark> Bookmarks { get; set; } = new();
+
+        public List<Post> LikedPosts { get; set; } = new();
+        public List<Like> Likes { get; set; } = new();
     }
 }
