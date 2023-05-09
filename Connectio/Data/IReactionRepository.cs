@@ -8,6 +8,9 @@ namespace Connectio.Data
         void CreateBookmark(Bookmark bookmark);
         void DeleteBookmark(Bookmark bookmark);
         List<Bookmark> GetAllBookmarks(ApplicationUser user);
+        Like? GetLike(ApplicationUser user, Post post);
+        void CreateLike(Like like);
+        void DeleteLike(Like like);
         PostReactions GetReactions(ApplicationUser user, Post post);
     }
 }

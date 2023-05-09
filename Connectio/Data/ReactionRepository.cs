@@ -34,11 +34,29 @@ namespace Connectio.Data
             return _dbContext.Bookmarks.Where(b => b.User == user).Include(b => b.Post).Include(p => p.Post.User).ToList();
         }
 
+        public Like? GetLike(ApplicationUser user, Post post)
+        {
+            return _dbContext.Likes.Where(b => b.User == user && b.Post == post).FirstOrDefault();
+        }
+
+        public void CreateLike(Like like)
+        {
+            _dbContext.Likes.Add(like);
+            _dbContext.SaveChanges();
+        }
+
+        public void DeleteLike(Like like)
+        {
+            _dbContext.Likes.Remove(like);
+            _dbContext.SaveChanges();
+        }
+        
         public PostReactions GetReactions(ApplicationUser user, Post post)
         {
             return new PostReactions(post.Id)
             {
-                Bookmarked = _dbContext.Bookmarks.Any(b => b.User == user && b.Post == post)
+                Bookmarked = _dbContext.Bookmarks.Any(b => b.User == user && b.Post == post),
+                Liked = _dbContext.Likes.Any(b => b.User == user && b.Post == post)
             };
         }
     }
