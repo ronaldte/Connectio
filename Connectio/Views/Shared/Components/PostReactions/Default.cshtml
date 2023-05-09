@@ -1,0 +1,32 @@
+﻿@model PostReactions
+
+<div class="w-full mx-auto">
+    <!-- <ul class="grid grid-cols-6 justify-items-start"> -->
+    <ul class="flex justify-start leading-5">
+        <li><span class="hover:font-bold mr-16"><a href="#"><i class="bi bi-chat p-1"></i><span class="text-sm">98</span></a></span></li>
+        <li><span class="hover:font-bold mr-16"><a href="#"><i class="bi bi-arrow-repeat p-1"></i><span class="text-sm">13</span></a></span></li>
+        <li><span class="hover:font-bold mr-16"><a href="#"><i class="bi bi-heart p-1"></i><span class="text-sm">18</span></a></span></li>
+        @*<li><span class="hover:font-bold mr-16"><a href="#"><i class="bi bi-bookmark p-1"></i><span class="text-sm">2</span></a></span></li>*@
+
+        @*asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"*@
+        @if (Model.Bookmarked)
+        {
+            <li>
+                <form id="bookmarkForm" method="post" asp-controller="Reaction" asp-action="DeleteBookmark" asp-route-postId="@Model.PostId">
+                    <button id="bookmark" class="hover:font-bold mr-16" type="submit"><i class="bi bi-bookmark-fill text-green-500 p-1"></i></button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li>
+                <form id="bookmarkForm" method="post" asp-controller="Reaction" asp-action="CreateBookmark" asp-route-postId="@Model.PostId">
+                    <button id="bookmark" class="hover:font-bold mr-16" type="submit"><i class="bi bi-bookmark p-1"></i></button>
+                </form>
+            </li>
+        }
+
+        <li><span class="hover:font-bold mr-16"><a href="#"><i class="bi bi-share p-1"></i></a></span></li>
+        <li><span class="hover:font-bold"><a href="#"><i class="bi bi-three-dots"></i></a></span></li>
+    </ul>
+</div>
