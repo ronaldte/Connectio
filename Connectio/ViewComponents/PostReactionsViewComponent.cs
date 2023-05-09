@@ -26,7 +26,7 @@ namespace Connectio.ViewComponents
 
             if (user == null)
             {
-                return View(new PostReactions(postId));
+                return View(new PostReactions(post));
             }
 
             var reactions = _reactionRepository.GetReactions(user, post);

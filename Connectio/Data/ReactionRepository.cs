@@ -53,7 +53,7 @@ namespace Connectio.Data
         
         public PostReactions GetReactions(ApplicationUser user, Post post)
         {
-            return new PostReactions(post.Id)
+            return new PostReactions(post)
             {
                 Bookmarked = _dbContext.Bookmarks.Any(b => b.User == user && b.Post == post),
                 Liked = _dbContext.Likes.Any(b => b.User == user && b.Post == post)
