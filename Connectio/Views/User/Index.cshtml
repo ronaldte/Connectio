@@ -73,8 +73,8 @@
         <!-- stats -->
         <div>
             <ul class="flex justify-start">
-                <li><a class="hover:underline" href="#"><span class="font-bold">@Model.FollowingCount</span> Following</a></li>
-                <li><a class="hover:underline pl-2" href="#"> <span class="font-bold">@Model.FollowersCount</span> Followers</a></li>
+                <li><a asp-controller="User" asp-action="GetFollowings" asp-route-username="@Model.UserName" class="hover:underline"><span class="font-bold">@Model.FollowingCount</span> Following</a></li>
+                <li><a asp-controller="User" asp-action="GetFollowers"  asp-route-username="@Model.UserName" class="hover:underline pl-2"> <span class="font-bold">@Model.FollowersCount</span> Followers</a></li>
             </ul>
         </div>
     </div>

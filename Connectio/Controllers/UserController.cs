@@ -79,5 +79,27 @@ namespace Connectio.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult GetFollowers(string username)
+        {
+            var user = _userRepository.GetUserByUserName(username);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(new DisplayFollowerFollowingViewModel(user, user.Followers));
+        }
+
+        public IActionResult GetFollowings(string username)
+        {
+            var user = _userRepository.GetUserByUserName(username);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(new DisplayFollowerFollowingViewModel(user, user.Following));
+        }
     }
 }
