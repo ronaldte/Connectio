@@ -38,6 +38,7 @@ namespace Connectio.Controllers
             return View(viewModel);
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddFollower(string followingUsername)
         {
             var following = _userRepository.GetUserByUserName(followingUsername);
@@ -53,7 +54,28 @@ namespace Connectio.Controllers
             }
 
             following.Followers.Add(follower);
-            _userRepository.AddFollower(following);
+            _userRepository.UpdateFollower(following);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteFollower(string followingUsername)
+        {
+            var following = _userRepository.GetUserByUserName(followingUsername);
+            if (following == null)
+            {
+                return NotFound();
+            }
+
+            var follower = await _userManager.GetUserAsync(User);
+            if (follower == null)
+            {
+                return NotFound();
+            }
+
+            following.Followers.Remove(follower);
+            _userRepository.UpdateFollower(following);
 
             return RedirectToAction("Index", "Home");
         }

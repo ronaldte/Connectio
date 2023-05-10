@@ -2,7 +2,7 @@
 
 @if (Model.IsFollower)
 {
-    <form method="post" asp-controller="User" asp-action="AddFollower" asp-route-followingUsername="@Model.FollowingName">
+    <form method="post" asp-controller="User" asp-action="DeleteFollower" asp-route-followingUsername="@Model.FollowingName">
         <button class="rounded-full bg-orange-400 p-3 w-40 font-semibold text-white hover:bg-orange-500" type="submit">Unfollow</button>
     </form>
 }
