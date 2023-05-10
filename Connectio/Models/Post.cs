@@ -18,5 +18,8 @@ namespace Connectio.Models
 
         public List<ApplicationUser> LikedBy { get; set; } = new();
         public List<Like> Likes { get; set; } = new();
+
+        public List<ApplicationUser> CommentedBy { get; set; } = new();
+        public List<Comment> Comments { get; set; } = new();
     }
 }

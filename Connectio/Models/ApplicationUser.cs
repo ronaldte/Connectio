@@ -18,5 +18,8 @@ namespace Connectio.Models
 
         public List<Post> LikedPosts { get; set; } = new();
         public List<Like> Likes { get; set; } = new();
+
+        public List<Post> CommentedPosts { get; set; } = new();
+        public List<Comment> Comments { get; set; } = new();
     }
 }
