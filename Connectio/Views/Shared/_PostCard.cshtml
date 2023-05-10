@@ -6,7 +6,27 @@
         @if(Model.Header != null)
         {
             <div class="mb-2">
-                <span class="leading-5 font-semibold text-sm"><i class="bi bi-bookmark-check align-top mr-1"></i>@Model.Header</span>
+                <span class="leading-5 font-semibold text-sm">
+                    @if(Model.ActivityType == ActivityType.Bookmark)
+                    {
+                        <i class="bi bi-bookmark-check align-top mr-1"></i>
+                        @Model.Header
+                    }
+                    else if(Model.ActivityType == ActivityType.Comment)
+                    {
+                        <a asp-controller="User" asp-action="Index" asp-route-username="@Model.User.UserName" class="hover:underline">
+                            <i class="bi bi-chat align-top mr-1"></i>
+                            @Model.Header
+                        </a>
+                    }
+                    else if(Model.ActivityType == ActivityType.Like)
+                    {
+                        <a asp-controller="User" asp-action="Index" asp-route-username="@Model.User.UserName" class="hover:underline">
+                            <i class="bi bi-heart-fill text-red-500 align-top mr-1"></i>
+                            @Model.Header
+                        </a>
+                    }
+                </span>
             </div>
         }
         <!-- Header -->
@@ -23,7 +43,7 @@
 
                     </div>
                 </a>
-                <div class="text-sm text-gray-600"><span>@@@Model.User.UserName</span><i class="bi bi-dot"></i><span>@Model.Created</span></div>
+                <div class="text-sm text-gray-600"><span>@@@Model.User.UserName</span><i class="bi bi-dot"></i><span>@Model.PostCreated</span></div>
             </div>
         </div>
         <!-- Content -->
@@ -35,6 +55,41 @@
         </a>
 
         <!-- Footer -->
-        @await Component.InvokeAsync("PostReactions", new {postId = Model.Id})
+        @if(Model.ActivityType == ActivityType.New)
+        {
+            @await Component.InvokeAsync("PostReactions", new {postId = Model.Id})
+        }
+
+        @if (Model.ActivityType == ActivityType.Comment)
+        {
+            @if(Model.Comment != null)
+            {
+                var comment = Model.Comment;
+
+                <div class="w-full mb-4 rounded-xl bg-white px-5 py-5 border border-gray-200 shadow-lg">
+                    <div>
+                        <div class="w-full flex mb-2">
+                            <img class="block max-w-[50px] max-h-[50px] w-auto h-auto rounded-lg my-auto mr-3" src="https://picsum.photos/600/600" alt="">
+                            <div>
+                                <a asp-controller="User" asp-action="Index" asp-route-username="comment.User.UserName" class="hover:underline">
+                                    <div>
+                                        <span class="font-semibold">@comment.User.DisplayName</span>
+                                        @if (comment.User.Verified)
+                                        {
+                                            <i class="bi bi-patch-check-fill text-orange-400 align-[.125rem] ml-1"></i>
+                                        }
+
+                                    </div>
+                                </a>
+                                <div class="text-sm text-gray-600"><span>@@@comment.User.UserName</span></div>
+                            </div>
+                        </div>
+                        <div class="w-full rounded-lg my-1">                            
+                            <div>@comment.Text</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     </div>
 </div>
