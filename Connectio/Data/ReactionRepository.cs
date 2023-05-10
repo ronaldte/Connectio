@@ -39,6 +39,11 @@ namespace Connectio.Data
             return _dbContext.Likes.Where(b => b.User == user && b.Post == post).FirstOrDefault();
         }
 
+        public IEnumerable<Like> GetAllUserLikes(ApplicationUser user)
+        {
+            return _dbContext.Likes.Where(b => b.User == user).Include(b => b.Post);
+        }
+
         public void CreateLike(Like like)
         {
             _dbContext.Likes.Add(like);
@@ -75,6 +80,11 @@ namespace Connectio.Data
         public List<Comment> GetAllCommentsOnPost(Post post)
         {
             return _dbContext.Comments.Where(c => c.Post == post).Include(c => c.User).ToList();
+        }
+
+        public IEnumerable<Comment> GetAllUserComments(ApplicationUser user)
+        {
+            return _dbContext.Comments.Where(c => c.User == user).Include(c => c.Post);
         }
     }
 }
