@@ -1,11 +1,13 @@
 ﻿using Connectio.Data;
 using Connectio.Models;
 using Connectio.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
@@ -19,6 +21,7 @@ namespace Connectio.Controllers
             _userManager = userManager;
         }
 
+        [AllowAnonymous]
         public IActionResult Index(string username)
         {
             var user = _userRepository.GetUserByUserName(username);
