@@ -59,5 +59,22 @@ namespace Connectio.Data
                 Liked = _dbContext.Likes.Any(b => b.User == user && b.Post == post)
             };
         }
+
+        public void CreateComment(Comment comment)
+        {
+            _dbContext.Comments.Add(comment);
+            _dbContext.SaveChanges();
+        }
+
+        public void DeleteComment(Comment comment)
+        {
+            _dbContext.Comments.Remove(comment);
+            _dbContext.SaveChanges();
+        }
+
+        public List<Comment> GetAllCommentsOnPost(Post post)
+        {
+            return _dbContext.Comments.Where(c => c.Post == post).Include(c => c.User).ToList();
+        }
     }
 }
