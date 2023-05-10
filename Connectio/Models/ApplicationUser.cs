@@ -21,5 +21,8 @@ namespace Connectio.Models
 
         public List<Post> CommentedPosts { get; set; } = new();
         public List<Comment> Comments { get; set; } = new();
+
+        public List<ApplicationUser> Followers { get; } = new();
+        public List<ApplicationUser> Following { get; } = new();
     }
 }

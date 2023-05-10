@@ -38,6 +38,11 @@ namespace Connectio.Data
                 .HasMany(e => e.CommentedBy)
                 .WithMany(e => e.CommentedPosts)
                 .UsingEntity<Comment>(j => j.Property(e => e.Created).HasDefaultValueSql("GETUTCDATE()"));
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(e => e.Followers)
+                .WithMany(e => e.Following)
+                .UsingEntity(e => e.ToTable("Followers"));
         }
     }
 }
