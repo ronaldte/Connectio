@@ -128,5 +128,58 @@ namespace Connectio.Controllers
             _reactionRepository.DeleteLike(like);
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult CreateComment(int postId)
+        {
+            var post = _postRepository.GetPostById(postId);
+            if(post == null)
+            {
+                return NotFound();
+            }
+
+            return View(new DisplayCreateCommentViewModel(post));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateComment(int postId, CreateCommentViewModel newComment)
+        {
+
+            var post = _postRepository.GetPostById(postId);
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null || post == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(new DisplayCreateCommentViewModel(post, newComment.Text));
+            }
+            
+            var comment = new Comment()
+            {
+                User = user,
+                Post = post,
+                Text = newComment.Text
+            };
+            _reactionRepository.CreateComment(comment);
+            return RedirectToAction("DisplayPostComments", "Reaction", new { PostId = postId });
+        }
+
+        [AllowAnonymous]
+        public IActionResult DisplayPostComments(int postId)
+        {
+            var post = _postRepository.GetPostById(postId);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            var comments = _reactionRepository.GetAllCommentsOnPost(post);
+
+            var commentsViewModel = new ReadPostCommentsViewModel(post, comments);
+
+            return View(commentsViewModel);
+        }
     }
 }

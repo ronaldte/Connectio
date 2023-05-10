@@ -1,0 +1,55 @@
+﻿@model ReadPostCommentsViewModel
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Post Comments";
+}
+
+<div class="flex justify-end mb-3 -mt-2">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-controller="Reaction" asp-action="CreateComment" asp-route-postId="@Model.Post.Id" class="block w-32 rounded-full bg-orange-400 p-3 font-semibold text-center text-white hover:bg-orange-500"><i class="bi bi-pen"></i>Comment</a>
+    }
+</div>
+
+<partial name="_PostCard" model="@Model.Post" />
+
+<div class="w-full mb-4 rounded-xl bg-white px-5 py-2 shadow">
+    <div class="w-full rounded-lg">
+        @if (Model.Comments.Count > 0)
+        {
+            <p class="text-center">Lets take a look on what people are saying about this post</p>
+        }
+        else
+        {
+            <p class="text-center">No one commented this post, maybe you will be first?</p>
+        }
+    </div>
+</div>
+
+@foreach(var comment in Model.Comments){
+    <div class="w-full mb-4 rounded-xl bg-white px-5 py-5 shadow">
+        <div>
+            <div class="w-full flex mb-2">
+                <img class="block max-w-[50px] max-h-[50px] w-auto h-auto rounded-lg my-auto mr-3" src="https://picsum.photos/600/600" alt="">
+                <div>
+                    <a asp-controller="User" asp-action="Index" asp-route-username="comment.User.UserName" class="hover:underline">
+                        <div>
+                            <span class="font-semibold">@comment.User.DisplayName</span>
+                            @if (comment.User.Verified)
+                            {
+                                <i class="bi bi-patch-check-fill text-orange-400 align-[.125rem] ml-1"></i>
+                            }
+
+                        </div>
+                    </a>
+                    <div class="text-sm text-gray-600"><span>@@@comment.User.UserName</span></div>
+                </div>
+            </div>
+            <div class="w-full rounded-lg my-1">
+                <div>@comment.Text</div>
+            </div>
+        </div>
+    </div>
+}
