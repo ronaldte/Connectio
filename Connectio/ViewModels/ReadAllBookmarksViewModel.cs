@@ -12,7 +12,7 @@ namespace Connectio.ViewModels
             foreach(var bookmark in bookmarks)
             {
                 var header = $"Bookmarked on {bookmark.Created:d MMM yyyy}";
-                bookmarkedPosts.Add(new ReadPostViewModel(bookmark.Post, header));
+                bookmarkedPosts.Add(new ReadPostViewModel(bookmark.Post) { Header = header, ActivityType=ActivityType.Bookmark});
             }
             
             BookmarkedPosts = bookmarkedPosts;

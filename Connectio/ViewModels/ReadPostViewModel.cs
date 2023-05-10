@@ -6,21 +6,19 @@ namespace Connectio.ViewModels
     {
         public int Id { get; set; }
         public string Text { get; set; } = string.Empty;
-        public string Created { get; set; }
+        public string PostCreated { get; set; }
+        public DateTime ActivityCreated { get; set; }
         public ApplicationUser User { get; set; }
         public string? Header { get; set; } = null;
+        public Comment? Comment { get; set; } = null;
+        public ActivityType ActivityType { get; set; }
 
         public ReadPostViewModel(Post post)
         {
             Id = post.Id;
             Text = post.Text;
-            Created = CalculateAge(post.Created);
+            PostCreated = CalculateAge(post.Created);
             User = post.User;
-        }
-
-        public ReadPostViewModel(Post post, string header) : this(post)
-        {
-            Header = header;
         }
 
         private static string CalculateAge(DateTime created)
