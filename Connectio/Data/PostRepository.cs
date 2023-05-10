@@ -35,6 +35,7 @@ namespace Connectio.Data
                 .Include(p => p.User)
                 .Include(p => p.LikedBy)
                 .Include(p => p.BookmarkedBy)
+                .Include(p => p.Comments)
                 .FirstOrDefault();
         }
     }
