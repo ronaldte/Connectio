@@ -1,7 +1,11 @@
-﻿namespace Connectio.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Connectio.Models
 {
     public class Comment
     {
+        [Key]
+        public int Id { get; set; }
         public int PostId { get; set; }
         public Post Post { get; set; }
         public string ApplicationUserId { get; set; }
