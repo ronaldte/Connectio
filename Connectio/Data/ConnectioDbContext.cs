@@ -13,6 +13,7 @@ namespace Connectio.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<Bookmark> Bookmarks { get; set; }
         public DbSet<Like> Likes { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -32,6 +33,11 @@ namespace Connectio.Data
                 .HasMany(e => e.LikedBy)
                 .WithMany(e => e.LikedPosts)
                 .UsingEntity<Like>(j => j.Property(e => e.Created).HasDefaultValueSql("GETUTCDATE()"));
+
+            builder.Entity<Post>()
+                .HasMany(e => e.CommentedBy)
+                .WithMany(e => e.CommentedPosts)
+                .UsingEntity<Comment>(j => j.Property(e => e.Created).HasDefaultValueSql("GETUTCDATE()"));
         }
     }
 }
