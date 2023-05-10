@@ -12,7 +12,7 @@ namespace Connectio.Data
             _dbContext = dbContext;
         }
 
-        public void AddFollower(ApplicationUser following)
+        public void UpdateFollower(ApplicationUser following)
         {
             _dbContext.Users.Update(following);
             _dbContext.SaveChanges();
