@@ -1,5 +1,7 @@
 ﻿using Connectio.Data;
+using Connectio.Models;
 using Connectio.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.Controllers
@@ -8,11 +10,13 @@ namespace Connectio.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserController(IUserRepository userRepository, IPostRepository postRepository)
+        public UserController(IUserRepository userRepository, IPostRepository postRepository, UserManager<ApplicationUser> userManager)
         {
             _userRepository = userRepository;
             _postRepository = postRepository;
+            _userManager = userManager;
         }
 
         public IActionResult Index(string username)
@@ -32,6 +36,26 @@ namespace Connectio.Controllers
             
             var viewModel = new ReadUserViewModel(user, posts);
             return View(viewModel);
+        }
+
+        public async Task<IActionResult> AddFollower(string followingUsername)
+        {
+            var following = _userRepository.GetUserByUserName(followingUsername);
+            if (following == null)
+            {
+                return NotFound();
+            }
+
+            var follower = await _userManager.GetUserAsync(User);
+            if (follower == null)
+            {
+                return NotFound();
+            }
+
+            following.Followers.Add(follower);
+            _userRepository.AddFollower(following);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

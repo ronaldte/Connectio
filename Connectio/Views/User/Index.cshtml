@@ -17,15 +17,17 @@
         {
             <div class="my-auto mr-5">
 
-            @if(UserManager.GetUserName(User) == Model.UserName)
-            {
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" class="block rounded-full bg-orange-400 p-3 w-40 font-semibold text-white text-center hover:bg-orange-500">Edit</a>
-            }
-            else
-            {
-                <button class="rounded-full bg-orange-400 p-3 w-40 font-semibold text-white hover:bg-orange-500">Follow</button>
-            }
-            
+                @if(UserManager.GetUserName(User) == Model.UserName)
+                {
+                    <a asp-area="Identity" asp-page="/Account/Manage/Index" class="block rounded-full bg-orange-400 p-3 w-40 font-semibold text-white text-center hover:bg-orange-500">Edit</a>
+                }
+                else
+                {
+
+                    <form id="followForm" method="post" asp-controller="User" asp-action="AddFollower" asp-route-followingUsername="@Model.UserName">
+                            <button class="rounded-full bg-orange-400 p-3 w-40 font-semibold text-white hover:bg-orange-500" type="submit">Follow</button>
+                    </form>
+                }
             </div>
         }
        

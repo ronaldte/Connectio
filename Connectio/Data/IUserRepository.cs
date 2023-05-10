@@ -5,5 +5,6 @@ namespace Connectio.Data
     public interface IUserRepository
     {
         ApplicationUser? GetUserByUserName(string username);
+        void AddFollower(ApplicationUser following);
     }
 }
