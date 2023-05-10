@@ -1,4 +1,5 @@
 ﻿using Connectio.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Connectio.Data
 {
@@ -19,7 +20,11 @@ namespace Connectio.Data
 
         public ApplicationUser? GetUserByUserName(string username)
         {
-            return _dbContext.Users.Where(u => u.UserName == username).FirstOrDefault();
+            return _dbContext.Users.
+                Where(u => u.UserName == username)
+                .Include(u => u.Followers)
+                .Include(u => u.Following)
+                .FirstOrDefault();
         }
     }
 }
