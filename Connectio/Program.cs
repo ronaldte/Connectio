@@ -62,8 +62,8 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
-    name: "Home",
-    pattern: "{controller=Home}/{action=Index}"
+    name: "Explore",
+    pattern: "{controller=Explore}/{action=Index}"
 );
 app.MapRazorPages();
 

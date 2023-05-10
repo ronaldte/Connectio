@@ -42,7 +42,7 @@
                         <li class="mb-5 @ActiveNavigationPage.HomeActivePage(ViewContext)"><a asp-controller="Home" asp-action="Index"  class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3"><i class="pr-5 bi bi-house"></i>Home</a></li>
                     }
                     
-                    <li class="mb-5"><a asp-controller="Home" asp-action="Index" class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3"><i class="pr-5 bi bi-hash"></i>Explore</a></li>
+                    <li class="mb-5 @ActiveNavigationPage.ExploreActivePage(ViewContext)"><a asp-controller="Explore" asp-action="Index" class="hover:bg-orange-400 hover:text-white hover:rounded-full hover:p-3 hover:-m-3"><i class="pr-5 bi bi-hash"></i>Explore</a></li>
 
                     @if (SignInManager.IsSignedIn(User))
                     {
