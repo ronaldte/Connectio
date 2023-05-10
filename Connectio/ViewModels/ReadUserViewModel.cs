@@ -13,6 +13,8 @@ namespace Connectio.ViewModels
         public bool Verified { get; set; } = false;
         public string Created { get; set; } = string.Empty;
         public List<ReadPostViewModel> Posts { get; set; } = new();
+        public int FollowersCount { get; set; } = 0;
+        public int FollowingCount { get; set; } = 0;
 
         public ReadUserViewModel(ApplicationUser user)
         {
@@ -24,6 +26,8 @@ namespace Connectio.ViewModels
             Protected = user.Protected;
             Verified = user.Verified;
             Created = user.Created.ToString("Y");
+            FollowersCount = user.Followers.Count;
+            FollowingCount = user.Following.Count;
         }
         public ReadUserViewModel(ApplicationUser user, List<ReadPostViewModel> posts) : this(user)
         {
