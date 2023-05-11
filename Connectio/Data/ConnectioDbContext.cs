@@ -49,6 +49,11 @@ namespace Connectio.Data
                 .HasMany(e => e.Tags)
                 .WithMany(e => e.Posts)
                 .UsingEntity("PostTagMention");
+
+            builder.Entity<Post>()
+                .HasMany(e => e.UserMentions)
+                .WithMany(e => e.PostMentions)
+                .UsingEntity("PostUserMention");
         }
     }
 }
