@@ -43,6 +43,11 @@ namespace Connectio.Data
                 .HasMany(e => e.Followers)
                 .WithMany(e => e.Following)
                 .UsingEntity(e => e.ToTable("Followers"));
+
+            builder.Entity<Post>()
+                .HasMany(e => e.Tags)
+                .WithMany(e => e.Posts)
+                .UsingEntity("PostTagMention");
         }
     }
 }
