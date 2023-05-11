@@ -34,6 +34,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IReactionRepository, ReactionRepository>();
+builder.Services.AddScoped<IMentionRepository, MentionRepository>();
 
 var app = builder.Build();
 
