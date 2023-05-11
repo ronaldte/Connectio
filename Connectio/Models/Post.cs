@@ -23,5 +23,6 @@ namespace Connectio.Models
         public List<Comment> Comments { get; set; } = new();
 
         public List<Tag> Tags { get; set; } = new();
+        public List<ApplicationUser> UserMentions { get; set; } = new();
     }
 }

@@ -24,5 +24,7 @@ namespace Connectio.Models
 
         public List<ApplicationUser> Followers { get; } = new();
         public List<ApplicationUser> Following { get; } = new();
+
+        public List<Post> PostMentions { get; } = new();
     }
 }
