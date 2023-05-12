@@ -1,4 +1,5 @@
 ﻿using Connectio.Models;
+using System.Text.RegularExpressions;
 
 namespace Connectio.Data
 {
@@ -36,13 +37,13 @@ namespace Connectio.Data
 
         private void AddMentions(Post post, Func<string, Post, Post> getMention, char startsWith)
         {
-            var mentions = post.Text.Split(' ')
-                .Where(word => word.StartsWith(startsWith))
-                .Select(word => word.Replace(startsWith.ToString(), ""))
-                .Distinct()
-                .ToList();
-            
-            foreach(var mention in mentions)
+            var pattern = @"\B[#@]([a-zA-Z0-9(_)]+\b)";
+            var rgx = new Regex(pattern);
+            var matches = rgx.Matches(post.Text);
+
+            var mentions = matches.Select(m => m.Groups[1].Value).Distinct();
+
+            foreach (var mention in mentions)
             {
                 post = getMention(mention, post);
             }
