@@ -1,4 +1,5 @@
 ﻿using Connectio.Models;
+using System.Text.RegularExpressions;
 
 namespace Connectio.ViewModels
 {
@@ -16,9 +17,16 @@ namespace Connectio.ViewModels
         public ReadPostViewModel(Post post)
         {
             Id = post.Id;
-            Text = post.Text;
+            Text = HightlightMentions(post.Text);
             PostCreated = CalculateAge(post.Created);
             User = post.User;
+        }
+
+        private static string HightlightMentions(string text)
+        {
+            string pattern = @"\B([#@][a-zA-Z0-9(_)]+\b)";
+            string replace = """<strong class="text-orange-400">$&</strong>""";
+            return Regex.Replace(text, pattern, replace);
         }
 
         private static string CalculateAge(DateTime created)
