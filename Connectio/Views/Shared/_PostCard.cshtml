@@ -50,7 +50,7 @@
         <a asp-controller="Post" asp-action="Index" asp-route-id="@Model.Id">
             <div class="w-full rounded-lg my-4 hover:bg-gray-100 hover:rounded">
                 <!-- <img class="mx-auto" src="https://picsum.photos/500/500" alt=""> -->
-                <div>@Html.Raw(Model.Text)</div>
+                <div class="whitespace-pre-line">@Html.Raw(Model.Text)</div>
             </div>
         </a>
 
