@@ -39,21 +39,21 @@ namespace Connectio.Controllers
                 var followeePosts = _postRepository.GetAllPostsByUser(followee.UserName);
                 foreach (var post in followeePosts)
                 {
-                    posts.Add(new ReadPostViewModel(post) {ActivityCreated=post.Created});
+                    posts.Add(new ReadPostViewModel(post) {ActivityCreated=post.Created, ActivityUserName=followee.UserName});
                 }
 
                 var followeeLikes = _reactionRepository.GetAllUserLikes(followee);
                 var header = $"{followee.DisplayName} (@{followee.UserName}) liked";
                 foreach(var like in followeeLikes)
                 {
-                    posts.Add(new ReadPostViewModel(like.Post) { Header = header, ActivityCreated=like.Created, ActivityType = ActivityType.Like });
+                    posts.Add(new ReadPostViewModel(like.Post) { Header = header, ActivityCreated=like.Created, ActivityType = ActivityType.Like, ActivityUserName= followee.UserName });
                 }
 
                 var followeeComments = _reactionRepository.GetAllUserComments(followee);
                 header = $"{followee.DisplayName}(@{followee.UserName}) commented on";
                 foreach (var comment in followeeComments)
                 {
-                    posts.Add(new ReadPostViewModel(comment.Post) { Header = header, ActivityCreated=comment.Created, Comment=comment, ActivityType=ActivityType.Comment});
+                    posts.Add(new ReadPostViewModel(comment.Post) { Header = header, ActivityCreated=comment.Created, Comment=comment, ActivityType=ActivityType.Comment, ActivityUserName=followee.UserName});
                 }
             }
 

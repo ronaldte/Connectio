@@ -14,14 +14,14 @@
                     }
                     else if(Model.ActivityType == ActivityType.Comment)
                     {
-                        <a asp-controller="User" asp-action="Index" asp-route-username="@Model.User.UserName" class="hover:underline">
+                        <a asp-controller="User" asp-action="Index" asp-route-username="@Model.ActivityUserName" class="hover:underline">
                             <i class="bi bi-chat align-top mr-1"></i>
                             @Model.Header
                         </a>
                     }
                     else if(Model.ActivityType == ActivityType.Like)
                     {
-                        <a asp-controller="User" asp-action="Index" asp-route-username="@Model.User.UserName" class="hover:underline">
+                        <a asp-controller="User" asp-action="Index" asp-route-username="@Model.ActivityUserName" class="hover:underline">
                             <i class="bi bi-heart-fill text-red-500 align-top mr-1"></i>
                             @Model.Header
                         </a>

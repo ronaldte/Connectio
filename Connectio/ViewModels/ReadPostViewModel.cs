@@ -13,6 +13,7 @@ namespace Connectio.ViewModels
         public string? Header { get; set; } = null;
         public Comment? Comment { get; set; } = null;
         public ActivityType ActivityType { get; set; }
+        public string? ActivityUserName { get; set; }
 
         public ReadPostViewModel(Post post)
         {
