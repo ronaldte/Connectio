@@ -42,6 +42,7 @@ namespace Connectio.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddFollower(string followingUsername)
         {
             var following = _userRepository.GetUserByUserName(followingUsername);
@@ -59,10 +60,11 @@ namespace Connectio.Controllers
             following.Followers.Add(follower);
             _userRepository.UpdateFollower(following);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "User", new { username = followingUsername});
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteFollower(string followingUsername)
         {
             var following = _userRepository.GetUserByUserName(followingUsername);
@@ -80,10 +82,10 @@ namespace Connectio.Controllers
             following.Followers.Remove(follower);
             _userRepository.UpdateFollower(following);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "User", new { username = followingUsername});
         }
 
-        public IActionResult GetFollowers(string username)
+        public IActionResult Followers(string username)
         {
             var user = _userRepository.GetUserByUserName(username);
             if (user == null)
@@ -94,7 +96,7 @@ namespace Connectio.Controllers
             return View(new DisplayFollowerFollowingViewModel(user, user.Followers));
         }
 
-        public IActionResult GetFollowings(string username)
+        public IActionResult Following(string username)
         {
             var user = _userRepository.GetUserByUserName(username);
             if (user == null)

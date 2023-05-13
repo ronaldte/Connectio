@@ -1,0 +1,26 @@
+﻿@model DisplayFollowerFollowingViewModel
+
+@{
+    ViewData["Title"] = $"Following of {Model.User.DisplayName} (@{Model.User.UserName}) / Connectio";
+    ViewData["ActiveNavigationPage"] = ActiveNavigationPage.Profile;
+}
+
+<partial name="_UserCard" model="@Model.User" />
+
+<div class="w-full mb-4 rounded-xl bg-white px-5 py-2 shadow">
+    <div class="w-full rounded-lg">
+        @if (Model.Users.Count() > 0)
+        {
+            <p class="text-center">@Model.User.DisplayName is following</p>
+        }
+        else
+        {
+            <p class="text-center">@Model.User.DisplayName is not following anyone</p>
+        }
+    </div>
+</div>
+
+@foreach (var user in Model.Users)
+{
+    <partial name="_UserCard" model="@user" />
+}
