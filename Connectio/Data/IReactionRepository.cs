@@ -12,7 +12,6 @@ namespace Connectio.Data
         IEnumerable<Like> GetAllUserLikes(ApplicationUser user);
         void CreateLike(Like like);
         void DeleteLike(Like like);
-        PostReactions GetReactions(ApplicationUser user, Post post);
         void CreateComment(Comment comment);
         void DeleteComment(Comment comment);
         List<Comment> GetAllCommentsOnPost(Post post);

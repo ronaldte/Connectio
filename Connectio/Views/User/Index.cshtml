@@ -32,11 +32,13 @@
     <div class="w-full p-5 space-y-4">
         <!-- header -->
         <div>
-            <div>
+            <div class="flex items-center">
                 <span class="font-bold text-lg">@Model.DisplayName </span>
                 @if (Model.Verified)
                 {
-                    <i class="bi bi-patch-check-fill text-orange-400 align-top ml-1"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 ml-1">
+                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                    </svg>
                 }
             </div>
             <div class="text-sm text-gray-600"><span>@@@Model.UserName</span></div>
@@ -50,22 +52,38 @@
         </div>
 
         <!-- links -->
-        <div class="text-gray-500 text-base">            
-            <span class="pr-3 leading-5 hidden"><i class="bi bi-briefcase align-top p-1"></i>Not Implemented</span>
+        <div class="text-gray-500 text-base flex">            
             
             @if(Model.Location != null)
             {
-                <span class="pr-3 leading-5"><i class="bi bi-geo-alt align-top p-1"></i>@Model.Location</span>    
+                <div class="flex items-center mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                    <span>@Model.Location</span>
+                </div>
             }
 
             @if (Model.Url != null)
             {
-                <span class="pr-3 leading-5"><i class="bi bi-link-45deg align-top p-1"></i><a class="hover:underline text-blue-400" href="@Model.Url">@Model.Url</a></span>
+                <div class="flex items-center mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                    </svg>
+
+                    <span><a href="@Model.Url" class="text-blue-400 hover:underline">@Model.Url</a></span>
+                </div>
             }
 
             @if (Model.Created != null)
             {
-                <span class="leading-5"><i class="bi bi-calendar align-top p-1"></i>Joined @Model.Created</span>
+                <div class="flex items-center mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                    </svg>
+                    <span>@Model.Location</span>
+                </div>
             }
             
         </div>

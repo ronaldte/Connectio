@@ -1,5 +1,6 @@
 ﻿using Connectio.Data;
 using Connectio.Models;
+using Connectio.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,14 +25,20 @@ namespace Connectio.ViewComponents
             var post = _postRepository.GetPostById(postId)!;
             var user = await _userManager.GetUserAsync(UserClaimsPrincipal);
 
-            if (user == null)
+            var reactionViewModel = new ReadReactionViewModel() {
+                PostId = post.Id,
+                CommentsCount = post.Comments.Count,
+                LikesCount = post.Likes.Count,
+                BookmarksCount = post.Bookmarks.Count,
+            };
+
+            if (user != null)
             {
-                return View(new PostReactions(post));
+                reactionViewModel.Liked = post.LikedBy.Any(l => l.UserName == user.UserName);
+                reactionViewModel.Bookmarked = post.BookmarkedBy.Any(b => b.UserName == user.UserName);
             }
 
-            var reactions = _reactionRepository.GetReactions(user, post);
-
-            return View(reactions);
+            return View(reactionViewModel);
         }
     }
 }
