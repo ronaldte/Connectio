@@ -14,9 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-100 bg-no-repeat min-h-screen">
+<body class="bg-slate-50 bg-no-repeat min-h-screen">
     <div class="shadow-md bg-white shadow-gray-200 sticky top-0">
-        <div class="container px-14 mx-auto">
+        <div class="container px-40 mx-auto">
             <div class="py-2">
                 <nav class="w-full flex justify-between">
                     <div class="flex">
@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="container px-14 h-full mx-auto grid grid-cols-[275px_auto_350px]">
+    <div class="container px-36 h-full mx-auto grid grid-cols-[275px_auto_350px]">
         @*Menu*@
         <div>
             <div class="fixed mt-5 pr-5 w-[275px]">
@@ -151,6 +151,8 @@
     </div>
 
     @RenderSection("Scripts", required: false);
+
+    <script src="~/js/site.js"></script>
 
 </body>
 </html>

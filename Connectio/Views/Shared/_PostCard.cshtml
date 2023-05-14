@@ -1,7 +1,7 @@
 ﻿@model ReadPostViewModel
 
 
-<div class="w-full mb-4 rounded-xl bg-white p-5 shadow">
+<article id=@Model.Id class="connectio-post w-full mb-3 rounded-xl bg-white p-5 shadow">
     <div>
         @if(Model.Header != null)
         {
@@ -68,12 +68,10 @@
             </div>
         </div>
         <!-- Content -->
-        <a asp-controller="Post" asp-action="Index" asp-route-id="@Model.Id">
-            <div class="w-full rounded-lg my-4 hover:bg-gray-100 hover:rounded">
-                <!-- <img class="mx-auto" src="https://picsum.photos/500/500" alt=""> -->
-                <div class="whitespace-pre-line">@Html.Raw(Model.Text)</div>
-            </div>
-        </a>
+        <div class="w-full rounded-lg my-4">
+            <!-- <img class="mx-auto" src="https://picsum.photos/500/500" alt=""> -->
+            <div class="whitespace-pre-line">@Html.Raw(Model.Text)</div>
+        </div>
 
         <!-- Footer -->
         @if(Model.ActivityType == ActivityType.New)
@@ -115,4 +113,4 @@
             }
         }
     </div>
-</div>
+</article>
