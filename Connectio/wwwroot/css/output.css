@@ -779,6 +779,10 @@ html {
   width: 100%;
 }
 
+.w-28 {
+  width: 7rem;
+}
+
 .max-w-\[180px\] {
   max-width: 180px;
 }
