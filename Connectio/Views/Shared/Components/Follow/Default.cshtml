@@ -1,16 +1,23 @@
 ﻿@model DisplayFollowViewModel
 
-@if (Model.IsFollower)
-{
-    <form method="post" asp-controller="User" asp-action="DeleteFollower" asp-route-followingUsername="@Model.FollowingName">
-        <button class="rounded-full bg-orange-400 px-4 py-1 font-semibold text-white hover:bg-orange-500" type="submit">Following</button>
-    </form>
-}
-else
-{
-    <form method="post" asp-controller="User" asp-action="AddFollower" asp-route-followingUsername="@Model.FollowingName">
-        <button class="rounded-full bg-orange-400 px-4 py-1 font-semibold text-white hover:bg-orange-500" type="submit">Follow</button>
-    </form>
-}
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
-
+@if (SignInManager.IsSignedIn(User))
+{
+    if (UserManager.GetUserName(User) != Model.FollowingName)
+    {
+        @if (Model.IsFollower)
+        {
+            <form method="post" asp-controller="User" asp-action="DeleteFollower" asp-route-followingUsername="@Model.FollowingName">
+                <button class="rounded-full bg-orange-400 px-4 py-1 font-semibold text-white hover:bg-orange-500" type="submit">Following</button>
+            </form>
+        }
+        else
+        {
+            <form method="post" asp-controller="User" asp-action="AddFollower" asp-route-followingUsername="@Model.FollowingName">
+                <button class="rounded-full bg-orange-400 px-4 py-1 font-semibold text-white hover:bg-orange-500" type="submit">Follow</button>
+            </form>
+        }
+    }
+}

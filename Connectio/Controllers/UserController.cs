@@ -57,6 +57,11 @@ namespace Connectio.Controllers
                 return NotFound();
             }
 
+            if (follower == following)
+            {
+                return BadRequest();
+            }
+
             following.Followers.Add(follower);
             _userRepository.UpdateFollower(following);
 
@@ -77,6 +82,11 @@ namespace Connectio.Controllers
             if (follower == null)
             {
                 return NotFound();
+            }
+
+            if (follower == following)
+            {
+                return BadRequest();
             }
 
             following.Followers.Remove(follower);
