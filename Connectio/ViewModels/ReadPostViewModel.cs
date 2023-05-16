@@ -1,4 +1,5 @@
 ﻿using Connectio.Models;
+using Connectio.Utils;
 using System.Text.RegularExpressions;
 
 namespace Connectio.ViewModels
@@ -14,12 +15,13 @@ namespace Connectio.ViewModels
         public Comment? Comment { get; set; } = null;
         public ActivityType ActivityType { get; set; }
         public string? ActivityUserName { get; set; }
+        public IEnumerable<ReadCommentViewModel>? Comments { get; set; }
 
         public ReadPostViewModel(Post post)
         {
             Id = post.Id;
             Text = HightlightMentions(post.Text);
-            PostCreated = CalculateAge(post.Created);
+            PostCreated = post.Created.TimeSinceCreated();
             User = post.User;
         }
 

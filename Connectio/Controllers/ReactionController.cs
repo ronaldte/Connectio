@@ -164,22 +164,7 @@ namespace Connectio.Controllers
                 Text = newComment.Text
             };
             _reactionRepository.CreateComment(comment);
-            return RedirectToAction("DisplayPostComments", "Reaction", new { PostId = postId });
-        }
-
-        [AllowAnonymous]
-        public IActionResult DisplayPostComments(int postId)
-        {
-            var post = _postRepository.GetPostById(postId);
-            if (post == null)
-            {
-                return NotFound();
-            }
-            var comments = _reactionRepository.GetAllCommentsOnPost(post);
-
-            var commentsViewModel = new ReadPostCommentsViewModel(post, comments);
-
-            return View(commentsViewModel);
+            return RedirectToAction("Index", "Post", new { id = postId });
         }
     }
 }

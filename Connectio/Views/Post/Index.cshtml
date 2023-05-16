@@ -5,3 +5,20 @@
 }
 
 <partial name="_PostCard" model="@Model"/>
+
+<div class="flex justify-end my-2">
+    <a asp-controller="Reaction" asp-action="CreateComment" asp-route-postId="@Model.Id" class="block rounded-full bg-orange-400 px-3 py-2 w-40 font-semibold text-white text-center hover:bg-orange-500">Add comment</a>
+</div>
+
+@if(Model.Comments == null){
+    <div class="text-center">
+        <h3 class="font-semibold text-lg text-gray-800">No comments found</h3>
+    </div>
+}else{
+    <partial name="_Divider" model=@("Post comments (" + Model.Comments.Count() + ")") />
+
+    foreach(var comment in Model.Comments)
+    {
+        <partial name="_CommentCard" model="comment" />
+    }
+}
