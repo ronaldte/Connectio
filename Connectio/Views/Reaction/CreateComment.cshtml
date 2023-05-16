@@ -11,7 +11,7 @@
     <div class="flex justify-between">
         <div class="w-full my-auto">
             <form asp-controller="Reaction" asp-action="CreateComment" asp-route-postId="@Model.Post.Id">
-                <input asp-for="@Model.Text" class="w-full p-3 mb-2" type="text" placeholder="What is your reply?">
+                <input asp-for="@Model.Text" class="w-full p-3 mb-2 focus:outline-0" type="text" placeholder="What is your reply?">
                 <div class="flex justify-between pl-3">
                     <div>
                         <button id="new-comment-submit" type="submit" class="rounded-full bg-orange-400 px-3 py-2 w-32 font-semibold text-white hover:bg-orange-500">Post</button>
