@@ -2,19 +2,7 @@
 
 <partial name="_PostCard" model="@Model.Post" />
 
-
-<div class="w-full mb-4 rounded-xl bg-white px-5 py-2 shadow">
-    <div class="w-full rounded-lg">
-        @if(Model.LikedBy.Count() > 0)
-        {
-            <p class="text-center">This post was liked by all these people</p>
-        }
-        else
-        {
-            <p class="text-center">No one liked this post, maybe you will be first?</p>
-        }
-    </div>
-</div>
+<partial name="_Divider" model=@("Post likes (" + Model.LikedBy.Count() + ")") />
 
 @foreach(var user in Model.LikedBy){
     <div class="w-full mb-4 rounded-xl bg-white px-5 py-1 shadow">
