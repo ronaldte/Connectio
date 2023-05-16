@@ -28,7 +28,10 @@ namespace Connectio.Controllers
                 return NotFound();
             }
 
-            var postViewModel = new ReadPostViewModel(post);
+            var postViewModel = new ReadPostViewModel(post)
+            {
+                Comments = post.Comments.Select(c => new ReadCommentViewModel(c)).OrderByDescending(c => c.Created)
+            };
             return View(postViewModel);
         }
         

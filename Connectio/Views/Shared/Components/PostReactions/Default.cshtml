@@ -12,7 +12,7 @@
                 </a>
                 @if(Model.CommentsCount > 0)
                 {
-                    <a asp-controller="Reaction" asp-action="DisplayPostComments" asp-route-postId="@Model.PostId" class="hover:underline">@Model.CommentsCount @("Comment" + (Model.CommentsCount > 1 ? "s" : ""))</a>
+                    <a asp-controller="Post" asp-action="Index" asp-route-id="@Model.PostId" class="hover:underline">@Model.CommentsCount @("Comment" + (Model.CommentsCount > 1 ? "s" : ""))</a>
                 }
             </div>
         </li>
