@@ -12,6 +12,17 @@ if (!actuall_pathname.startsWith(path)) {
     })
 }
 
+document.getElementById("search-input").addEventListener('keyup', (event) => {
+    const button = document.getElementById("search-button");
+    if (event.target.value.length != 0) {
+        button.disabled = false;
+        button.classList.remove("cursor-not-allowed");
+    } else {
+        button.disabled = true;
+        button.classList.add("cursor-not-allowed");        
+    }
+})
+
 function changeTab(event, tab) {
     document.querySelectorAll(".tab-link").forEach(tab => {
         tab.classList.remove("border-orange-400", "text-orange-400");
@@ -26,4 +37,3 @@ function changeTab(event, tab) {
 
     document.getElementById(tab).removeAttribute("hidden");
 }
-
