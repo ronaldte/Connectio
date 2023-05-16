@@ -12,6 +12,15 @@ if (!actuall_pathname.startsWith(path)) {
     })
 }
 
+window.addEventListener("DOMContentLoaded", (event) => {
+    const button = document.getElementById("search-button");
+    const input_field = document.getElementById("search-input");
+    if (input_field.value.length == 0) {
+        button.disabled = true;
+        button.classList.add("cursor-not-allowed");
+    }
+});
+
 document.getElementById("search-input").addEventListener('keyup', (event) => {
     const button = document.getElementById("search-button");
     if (event.target.value.length != 0) {

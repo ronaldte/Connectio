@@ -1,0 +1,13 @@
+﻿@model SearchTagViewModel
+
+@{
+    ViewData["Search"] = $"Showing results for&nbsp<strong>{Model.SearchKeyword}</strong>";
+    ViewData["Title"] = $"Search tags for {Model.SearchKeyword} / Connectio";
+}
+
+<partial name="_Divider" model=@ViewData["search"] />
+
+@foreach (var tag in Model.Tags)
+{
+    <partial name="_TagCard" model="tag" />
+}

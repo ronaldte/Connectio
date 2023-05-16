@@ -1,0 +1,12 @@
+﻿@model SearchUserViewModel
+
+@{
+    ViewData["Search"] = $"Showing results for&nbsp<strong>{Model.SearchKeyword}</strong>";
+    ViewData["Title"] = $"Search users for {Model.SearchKeyword} / Connectio";
+}
+
+<partial name="_Divider" model=@ViewData["search"] />
+
+@foreach(var user in Model.Users){
+    <partial name="_ShortUserProfile" model="user" />
+}

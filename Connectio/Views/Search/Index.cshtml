@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = $"Search {Model.SearchKeyword} in Posts, Users and Tags / Connectio";
+
+    int numberOfReturnedItems = 5;
 }
 
 <div class="font-medium text-center text-gray-500 border-b border-gray-200 mb-4 w-full">
@@ -21,6 +23,19 @@
     {
         <partial name="_PostCard" model="post" />
     }
+    @if (Model.TotalFoundPosts > numberOfReturnedItems)
+    {
+        <div class="flex justify-center">
+            <a asp-controller="Search" asp-action="Post" asp-route-searchKeyword="@Model.SearchKeyword" class="rounded-full bg-orange-400 px-4 py-2 mb-2 w-32 font-semibold text-center text-white hover:bg-orange-500">Load more</a>
+        </div>
+    }
+    @if (Model.Posts.Count() == 0)
+    {
+        <div class="text-center">
+            <h3 class="font-semibold text-lg text-gray-800">No results found</h3>
+            <h4 class="text-sm text-gray-200">Try different search keyword</h4>
+        </div>
+    }
 </div>
 
 <div id="search-users" class="search-content" hidden>
@@ -28,12 +43,38 @@
     {
         <partial name="_ShortUserProfile" model="user" />
     }
+    @if (Model.TotalFoundUsers > numberOfReturnedItems)
+    {
+        <div class="flex justify-center">
+            <a asp-controller="Search" asp-action="UserProfile" asp-route-searchKeyword="@Model.SearchKeyword" class="rounded-full bg-orange-400 px-4 py-2 mb-2 w-32 font-semibold text-center text-white hover:bg-orange-500">Load more</a>
+        </div>
+    }
+    @if (Model.Users.Count() == 0)
+    {
+        <div class="text-center">
+            <h3 class="font-semibold text-lg text-gray-800">No results found</h3>
+            <h4 class="text-sm text-gray-200">Try different search keyword</h4>
+        </div>
+    }
 </div>
 
 <div id="search-tags" class="search-content" hidden>
     @foreach (var tag in Model.Tags)
     {
         <partial name="_TagCard" model="tag" />
+    }
+    @if (Model.TotalFoundTags > numberOfReturnedItems)
+    {
+        <div class="flex justify-center">
+            <a asp-controller="Search" asp-action="Tag" asp-route-searchKeyword="@Model.SearchKeyword" class="rounded-full bg-orange-400 px-4 py-2 mb-2 w-32 font-semibold text-center text-white hover:bg-orange-500">Load more</a>
+        </div>
+    }
+    @if (Model.Tags.Count() == 0)
+    {
+        <div class="text-center">
+            <h3 class="font-semibold text-lg text-gray-800">No results found</h3>
+            <h4 class="text-sm text-gray-200">Try different search keyword</h4>
+        </div>
     }
 </div>
 
