@@ -12,3 +12,18 @@ if (!actuall_pathname.startsWith(path)) {
     })
 }
 
+function changeTab(event, tab) {
+    document.querySelectorAll(".tab-link").forEach(tab => {
+        tab.classList.remove("border-orange-400", "text-orange-400");
+        tab.classList.add("hover:text-orange-400", "hover:border-orange-400", "hover:cursor-pointer");
+    })
+
+    event.target.classList.add("border-orange-400", "text-orange-400");
+
+    document.querySelectorAll(".search-content").forEach(contentTab => {
+        contentTab.hidden = true;
+    })
+
+    document.getElementById(tab).removeAttribute("hidden");
+}
+

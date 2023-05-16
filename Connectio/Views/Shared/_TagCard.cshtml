@@ -1,0 +1,19 @@
+﻿@model ReadTagViewModel
+
+<article class="w-full mb-3 rounded-xl bg-white p-5 shadow">
+    <div class="flex justify-between">
+        <div>
+            <a href="#" class=""><strong class="text-orange-400">#@(Model.Name)</strong></a>
+        </div>
+        <div>
+            @if(Model.PostsCount > 1)
+            {
+                <span>Used in @Model.PostsCount posts</span>
+            }
+            else
+            {
+                <span>Used in @Model.PostsCount post</span>
+            }
+        </div>
+    </div>
+</article>

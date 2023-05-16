@@ -1,0 +1,39 @@
+﻿@model SearchViewModel
+
+@{
+    ViewData["Title"] = $"Search {Model.SearchKeyword} in Posts, Users and Tags / Connectio";
+}
+
+<div class="font-medium text-center text-gray-500 border-b border-gray-200 mb-4 w-full">
+    <ul class="flex justify-around -mb-px">
+        <li class="tab-link mr-2 pb-2 px-4 border-b-2 border-b-2 border-orange-400 text-orange-400" onclick="changeTab(event, 'search-posts')">
+            Posts
+        </li>
+        <li class="tab-link mr-2 pb-2 px-4 border-b-2 hover:text-orange-400 hover:border-orange-400 hover:cursor-pointer" onclick="changeTab(event, 'search-users')">User profiles
+        </li>
+        <li class="tab-link mr-2 pb-2 px-4 border-b-2 hover:text-orange-400 hover:border-orange-400 hover:cursor-pointer" onclick="changeTab(event, 'search-tags')">Tags
+        </li>
+    </ul>
+</div>
+
+<div id="search-posts" class="search-content">
+    @foreach (var post in Model.Posts)
+    {
+        <partial name="_PostCard" model="post" />
+    }
+</div>
+
+<div id="search-users" class="search-content" hidden>
+    @foreach (var user in Model.Users)
+    {
+        <partial name="_ShortUserProfile" model="user" />
+    }
+</div>
+
+<div id="search-tags" class="search-content" hidden>
+    @foreach (var tag in Model.Tags)
+    {
+        <partial name="_TagCard" model="tag" />
+    }
+</div>
+
