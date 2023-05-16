@@ -1,0 +1,20 @@
+﻿@model ReadPostsWithTagViewModel
+
+@{
+    ViewData["Title"] = $"Posts tagged with {Model.Tag.Name} / Connectio";
+}
+
+@if(Model.Posts.Count() == 0)
+{
+    <div class="text-center">
+        <h3 class="font-semibold text-lg text-gray-800">No posts found</h3>
+    </div>
+}
+else
+{
+    <partial name="_Divider" model=@("Posts with tag&nbsp<strong>#" + Model.Tag.Name+"</strong>") />
+    foreach(var post in Model.Posts)
+    {
+        <partial name="_PostCard" model="post" />
+    }
+}

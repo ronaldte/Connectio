@@ -6,9 +6,7 @@ namespace Connectio.Data
     {
         void AddTags(Post post);
         void AddUsers(Post post);
-        IEnumerable<Tag> GetTags(Post post);
-        IEnumerable<ApplicationUser> GetUsers(Post post);
+        Tag? GetTag(string tagName);
         IEnumerable<Post> GetPosts(Tag tag);
-        IEnumerable<Post> GetPosts(ApplicationUser user);
     }
 }

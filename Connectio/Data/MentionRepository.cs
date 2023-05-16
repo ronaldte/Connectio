@@ -1,4 +1,5 @@
 ﻿using Connectio.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 
 namespace Connectio.Data
@@ -62,24 +63,15 @@ namespace Connectio.Data
             AddMentions(post, AddUser, '@');
         }
 
+        public Tag? GetTag(string tagName)
+        {
+            return _dbContext.Tags.Where(t => t.Name == tagName).FirstOrDefault();
+        }
+
         public IEnumerable<Post> GetPosts(Tag tag)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Post> GetPosts(ApplicationUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Tag> GetTags(Post post)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<ApplicationUser> GetUsers(Post post)
-        {
-            throw new NotImplementedException();
+            var tagDb = _dbContext.Tags.Where(t => t == tag).Include(t => t.Posts).ThenInclude(p => p.User).First();
+            return tagDb.Posts;
         }
     }
 }

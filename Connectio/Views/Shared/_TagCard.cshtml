@@ -3,7 +3,7 @@
 <article class="w-full mb-3 rounded-xl bg-white p-5 shadow">
     <div class="flex justify-between">
         <div>
-            <a href="#" class=""><strong class="text-orange-400">#@(Model.Name)</strong></a>
+            <a asp-controller="Reaction" asp-action="PostsWithTag" asp-route-tagName="@Model.Name"><strong class="text-orange-400">#@(Model.Name)</strong></a>
         </div>
         <div>
             @if(Model.PostsCount > 1)

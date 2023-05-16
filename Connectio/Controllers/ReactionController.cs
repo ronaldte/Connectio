@@ -12,12 +12,14 @@ namespace Connectio.Controllers
     {
         private readonly IReactionRepository _reactionRepository;
         private readonly IPostRepository _postRepository;
+        private readonly IMentionRepository _mentionRepository;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ReactionController(IReactionRepository reactionRepository, IPostRepository postRepository, UserManager<ApplicationUser> userManager)
+        public ReactionController(IReactionRepository reactionRepository, IPostRepository postRepository, IMentionRepository mentionRepository, UserManager<ApplicationUser> userManager)
         {
             _reactionRepository = reactionRepository;
             _postRepository = postRepository;
+            _mentionRepository = mentionRepository;
             _userManager = userManager;
         }
 
@@ -165,6 +167,23 @@ namespace Connectio.Controllers
             };
             _reactionRepository.CreateComment(comment);
             return RedirectToAction("Index", "Post", new { id = postId });
+        }
+        [AllowAnonymous]
+        public IActionResult PostsWithTag(string tagName)
+        {
+            var tag = _mentionRepository.GetTag(tagName);
+            if (tag == null)
+            {
+                return NotFound();
+            }
+
+            var posts = _mentionRepository.GetPosts(tag);
+
+            var tagViewModel = new ReadTagViewModel(tag);
+            var postsViewModel = posts.Select(p => new ReadPostViewModel(p));
+            
+            var viewModel = new ReadPostsWithTagViewModel(tagViewModel, postsViewModel);
+            return View(viewModel);
         }
     }
 }
