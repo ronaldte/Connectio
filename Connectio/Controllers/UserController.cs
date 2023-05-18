@@ -41,16 +41,6 @@ namespace Connectio.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if(user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddFollower(string followingUsername)
@@ -158,7 +148,7 @@ namespace Connectio.Controllers
 
             await SaveFile(picture.File, _userRepository.UpdateProfilePicture);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { username = _userManager.GetUserName(User) });
         }
 
         public IActionResult UpdateBannerPicture()
@@ -176,7 +166,7 @@ namespace Connectio.Controllers
 
             await SaveFile(picture.File, _userRepository.UpdateBannerPicture);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { username = _userManager.GetUserName(User) });
         }
         
         private async Task RemovePicture(Action<ApplicationUser, string?> removeFunction)
@@ -190,7 +180,7 @@ namespace Connectio.Controllers
         {
             await RemovePicture(_userRepository.UpdateProfilePicture);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { username = _userManager.GetUserName(User) });
         }
 
         [HttpPost]
@@ -198,7 +188,7 @@ namespace Connectio.Controllers
         {
             await RemovePicture(_userRepository.UpdateBannerPicture);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new {username = _userManager.GetUserName(User)});
         }
     }
 }
