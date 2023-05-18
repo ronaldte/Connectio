@@ -41,6 +41,16 @@ namespace Connectio.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> Index()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if(user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddFollower(string followingUsername)
@@ -115,6 +125,80 @@ namespace Connectio.Controllers
             }
 
             return View(new DisplayFollowerFollowingViewModel(user, user.Following));
+        }
+
+        private async Task SaveFile(IFormFile file, Action<ApplicationUser, string?> saveFunction)
+        {
+            var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
+
+            var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            var trustedFileNameForFileStorage = Guid.NewGuid().ToString() + fileExtension;
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\pictures", trustedFileNameForFileStorage);
+
+            using (var stream = System.IO.File.Create(filePath))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            saveFunction(user, trustedFileNameForFileStorage);
+        }
+
+        public IActionResult UpdateProfilePicture()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfilePicture(CreateFileViewModel picture)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            await SaveFile(picture.File, _userRepository.UpdateProfilePicture);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult UpdateBannerPicture()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateBannerPicture(CreateFileViewModel picture)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            await SaveFile(picture.File, _userRepository.UpdateBannerPicture);
+
+            return RedirectToAction("Index");
+        }
+        
+        private async Task RemovePicture(Action<ApplicationUser, string?> removeFunction)
+        {
+            var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
+            removeFunction(user, null);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveProfilePicture()
+        {
+            await RemovePicture(_userRepository.UpdateProfilePicture);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveBannerPicture()
+        {
+            await RemovePicture(_userRepository.UpdateBannerPicture);
+
+            return RedirectToAction("Index");
         }
     }
 }

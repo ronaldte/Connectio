@@ -1,0 +1,8 @@
+﻿@model CreateFileViewModel
+
+<form method="post" enctype="multipart/form-data" asp-controller="User" asp-action="UpdateBannerPicture">
+    <label asp-for="@Model.File"></label>
+    <input asp-for="@Model.File" type="file" />
+    <span asp-validation-for="@Model.File"></span>
+    <input type="submit" value="Upload" />
+</form>
