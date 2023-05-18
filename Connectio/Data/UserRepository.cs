@@ -26,5 +26,36 @@ namespace Connectio.Data
                 .Include(u => u.Following)
                 .FirstOrDefault();
         }
+
+        public void UpdateProfilePicture(ApplicationUser user, string? fileName)
+        {
+            if(fileName == null)
+            {
+                user.HasDefaultProfilePicture = true;
+                user.ProfilePictureUrl = string.Empty;
+            }
+            else
+            {
+                user.HasDefaultProfilePicture = false;
+                user.ProfilePictureUrl = fileName;
+            }
+            
+            _dbContext.SaveChanges();
+        }
+        public void UpdateBannerPicture(ApplicationUser user, string? fileName)
+        {
+            if (fileName == null)
+            {
+                user.HasDefaultBannerPicture = true;
+                user.BannerPictureUrl = string.Empty;
+            }
+            else
+            {
+                user.HasDefaultBannerPicture = false;
+                user.BannerPictureUrl = fileName;
+            }
+            
+            _dbContext.SaveChanges();
+        }
     }
 }
