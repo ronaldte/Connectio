@@ -1,7 +1,7 @@
 ﻿@model ReadUserViewModel
 
 @{
-    var ProfilePictureLink = "https://ui-avatars.com/api/?name=" + Model.UserName;
+    var ProfilePictureLink = "https://ui-avatars.com/api/?background=random&name=" + Model.UserName;
 }
 
 <img class="block" src=@ProfilePictureLink alt="User Profile Picture">

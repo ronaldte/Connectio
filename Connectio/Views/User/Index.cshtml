@@ -11,7 +11,9 @@
 <div class="w-full bg-white rounded-lg shadow mb-4">
     <img class="object-cover h-56 w-full rounded-t-lg" src="https://picsum.photos/1600/600" alt="">
     <div class="flex justify-between">
-        <img class="block max-w-[180px] max-h-[180px] w-auto h-auto rounded-lg my-auto border-solid border-4 border-white -mt-24 ml-5" src="https://picsum.photos/600/600" alt="">
+        <div class="-mt-24 ml-5 bg-white border-solid border-4 border-white rounded-xl">
+            <partial name="User/_LargeProfilePicture" model="@Model" />
+        </div>
         
         @if (SignInManager.IsSignedIn(User))
         {

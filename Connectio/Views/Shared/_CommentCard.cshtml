@@ -4,7 +4,9 @@
     <div>
         <div class="w-full flex mb-2 justify-between">
             <div class="flex">
-                <img class="block max-w-[50px] max-h-[50px] w-auto h-auto rounded-lg my-auto mr-3" src="https://picsum.photos/600/600" alt="">
+                <div class="mr-3">
+                    <partial name="User/_SmallProfilePicture" model="Model.User" />
+                </div>
                 <div>
                     <a asp-controller="User" asp-action="Index" asp-route-username="comment.User.UserName" class="hover:underline">
                         <div class="flex items-center">
