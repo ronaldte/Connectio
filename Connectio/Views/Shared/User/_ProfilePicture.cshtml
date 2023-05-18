@@ -1,0 +1,7 @@
+﻿@model ReadUserViewModel
+
+@{
+    var ProfilePictureLink = "https://ui-avatars.com/api/?name=" + Model.UserName;
+}
+
+<img class="block" src=@ProfilePictureLink alt="User Profile Picture">
