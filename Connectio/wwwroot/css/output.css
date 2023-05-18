@@ -726,6 +726,18 @@ html {
   height: 100vh;
 }
 
+.h-auto {
+  height: auto;
+}
+
+.max-h-\[50px\] {
+  max-height: 50px;
+}
+
+.max-h-\[180px\] {
+  max-height: 180px;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -780,6 +792,18 @@ html {
 
 .w-full {
   width: 100%;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.max-w-\[50px\] {
+  max-width: 50px;
+}
+
+.max-w-\[180px\] {
+  max-width: 180px;
 }
 
 .cursor-not-allowed {
