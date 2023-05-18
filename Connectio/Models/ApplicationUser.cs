@@ -12,6 +12,10 @@ namespace Connectio.Models
         public bool Protected { get; set; } = false;
         public bool Verified { get; set; } = false;
         public DateTime Created { get; set; }
+        public bool HasDefaultProfilePicture { get; set; } = true;
+        public string ProfilePictureUrl { get; set; } = string.Empty;
+        public bool HasDefaultBannerPicture { get; set; } = true;
+        public string BannerPictureUrl { get; set; } = string.Empty;
         public List<Post> Posts { get; set; } = new();
         public List<Post> BookmarkedPosts { get; set; } = new();
         public List<Bookmark> Bookmarks { get; set; } = new();
