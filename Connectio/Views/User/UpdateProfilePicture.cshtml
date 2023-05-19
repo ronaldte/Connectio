@@ -1,8 +1,42 @@
 ﻿@model CreateFileViewModel
 
-<form method="post" enctype="multipart/form-data" asp-controller="User" asp-action="UpdateProfilePicture">
-    <label asp-for="@Model.File"></label>
-    <input asp-for="@Model.File" type="file" />
-    <span asp-validation-for="@Model.File"></span>
-    <input type="submit" value="Upload" />
-</form>
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var user = new ReadUserViewModel(await UserManager.GetUserAsync(User));
+}
+
+<div class="space-y-6">
+    <h3 class="text-lg text-gray-500">Update your profile picture</h3>
+
+    <div class="rounded-xl">
+        <partial name="User/_LargeProfilePicture" model="user" />
+    </div>
+
+    <form method="post" enctype="multipart/form-data" asp-controller="User" asp-action="UpdateProfilePicture">
+        <div class="space-y-2">
+            <input type="file" asp-for="@Model.File" type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-400 file:text-white hover:file:bg-orange-500" />
+            <span asp-validation-for="@Model.File" class="text-red-500"></span>
+            <div class="flex justify-center">
+                <input type="submit" value="Update new profile picture" class="text-white bg-orange-400 hover:bg-orange-500 font-medium rounded-full text-sm px-5 py-2.5 text-center" />
+            </div>
+        </div>
+    </form>
+
+    <partial name="_Divider" model="@("or")" />
+
+    <div class="flex justify-center">
+        <form asp-controller="User" asp-action="RemoveProfilePicture" method="post">
+            <button type="submit">
+                <div class="flex border border-red-500 rounded-full font-medium text-sm px-5 py-2 text-center text-red-500 hover:bg-red-500 hover:text-white">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        <span>Remove profile picture</span>
+                    </div>
+                </div>
+            </button>
+        </form>
+    </div>
+</div>

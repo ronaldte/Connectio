@@ -148,7 +148,7 @@ namespace Connectio.Controllers
 
             await SaveFile(picture.File, _userRepository.UpdateProfilePicture);
 
-            return RedirectToAction("Index", new { username = _userManager.GetUserName(User) });
+            return RedirectToAction("UpdateProfilePicture");
         }
 
         public IActionResult UpdateBannerPicture()
@@ -166,7 +166,7 @@ namespace Connectio.Controllers
 
             await SaveFile(picture.File, _userRepository.UpdateBannerPicture);
 
-            return RedirectToAction("Index", new { username = _userManager.GetUserName(User) });
+            return RedirectToAction("UpdateBannerPicture");
         }
         
         private async Task RemovePicture(Action<ApplicationUser, string?> removeFunction)
@@ -180,7 +180,7 @@ namespace Connectio.Controllers
         {
             await RemovePicture(_userRepository.UpdateProfilePicture);
 
-            return RedirectToAction("Index", new { username = _userManager.GetUserName(User) });
+            return RedirectToAction("UpdateProfilePicture");
         }
 
         [HttpPost]
@@ -188,7 +188,7 @@ namespace Connectio.Controllers
         {
             await RemovePicture(_userRepository.UpdateBannerPicture);
 
-            return RedirectToAction("Index", new {username = _userManager.GetUserName(User)});
+            return RedirectToAction("UpdateBannerPicture");
         }
     }
 }
