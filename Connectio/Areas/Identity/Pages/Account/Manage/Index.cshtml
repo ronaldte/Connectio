@@ -7,6 +7,55 @@
 
 <partial name="_StatusMessage" for="StatusMessage" />
 <div>
+
+    <div class="space-y-4 mb-4 pb-5 border-b border-gray-200">
+        <div class="flex justify-between">
+            <form asp-controller="User" asp-action="RemoveProfilePicture" method="post">
+                <button type="submit">
+                    <div class="mr-5 flex border border-red-500 rounded-lg px-2 py-3 text-red-500 hover:bg-red-500 hover:text-white">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            <span>Remove</span>
+                        </div>
+                    </div>
+                </button>
+            </form>
+            <a class="block w-full" asp-controller="User" asp-action="UpdateProfilePicture">
+                <div class="flex justify-between border border-gray-200 rounded-lg px-2 py-3 hover:bg-gray-100">
+                    <span>Update Profile Picture</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </div>
+            </a>
+        </div>
+
+        <div class="flex justify-between">
+            <form asp-controller="User" asp-action="RemoveBannerPicture" method="post">
+                <button type="submit">
+                    <div class="mr-5 flex border border-red-500 rounded-lg px-2 py-3 text-red-500 hover:bg-red-500 hover:text-white">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            <span>Remove</span>
+                        </div>
+                    </div>
+                </button>
+            </form>
+            <a class="block w-full" asp-controller="User" asp-action="UpdateBannerPicture">
+                <div class="flex justify-between border border-gray-200 rounded-lg px-2 py-3 hover:bg-gray-100">
+                    <span>Update Banner Picture</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </div>
+            </a>
+        </div>
+    </div>
+
     <form class="space-y-4" id="profile-form" method="post">
         <div asp-validation-summary="ModelOnly" class="text-red-500" role="alert"></div>
         <div>
