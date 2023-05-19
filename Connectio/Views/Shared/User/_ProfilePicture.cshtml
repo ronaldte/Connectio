@@ -1,0 +1,13 @@
+﻿@model ReadUserViewModel
+
+@{
+    var ProfilePictureLink = "https://ui-avatars.com/api/?background=random&name=" + Model.UserName;
+}
+
+@if (Model.HasDefaultProfilePicture)
+{
+    <img class="block" src=@ProfilePictureLink alt="User Profile Picture">
+}else
+{
+    <img class="block" src="~/pictures/@Model.ProfilePictureUrl" alt="User profile picture">
+}

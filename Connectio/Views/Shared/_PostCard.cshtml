@@ -44,7 +44,9 @@
         }
         <!-- Header -->
         <div class="w-full flex">
-            <img class="block max-w-[50px] max-h-[50px] w-auto h-auto rounded-lg my-auto mr-3" src="https://picsum.photos/600/600" alt="">
+            <div class="mr-3">
+                <partial name="User/_SmallProfilePicture" model="@Model.User" />
+            </div>
             <div>
                  <a asp-controller="User" asp-action="Index" asp-route-username="@Model.User.UserName" class="hover:underline">
                     <div class="flex items-center">
@@ -69,7 +71,6 @@
         </div>
         <!-- Content -->
         <div class="w-full rounded-lg my-4">
-            <!-- <img class="mx-auto" src="https://picsum.photos/500/500" alt=""> -->
             <div class="whitespace-pre-line">@Html.Raw(Model.Text)</div>
         </div>
 
@@ -88,7 +89,9 @@
                 <div class="w-full mb-4 rounded-xl bg-white px-5 py-5 border border-gray-200 shadow-lg">
                     <div>
                         <div class="w-full flex mb-2">
-                            <img class="block max-w-[50px] max-h-[50px] w-auto h-auto rounded-lg my-auto mr-3" src="https://picsum.photos/600/600" alt="">
+                            <div class="mr-3">
+                                <partial name="User/_SmallProfilePicture" model="@comment.User" />
+                            </div>
                             <div>
                                 <a asp-controller="User" asp-action="Index" asp-route-username="comment.User.UserName" class="hover:underline">
                                     <div class="flex items-center">

@@ -1,0 +1,9 @@
+﻿@model ReadUserViewModel
+
+@if (Model.HasDefaultBannerPicture)
+{
+    <div class="bg-slate-100"></div>
+}
+else{
+    <img class="block" src="~/pictures/@Model.BannerPictureUrl" alt="User banner picture">
+}

@@ -6,5 +6,7 @@ namespace Connectio.Data
     {
         ApplicationUser? GetUserByUserName(string username);
         void UpdateFollower(ApplicationUser following);
+        void UpdateProfilePicture(ApplicationUser user, string? fileName);
+        void UpdateBannerPicture(ApplicationUser user, string? fileName);
     }
 }
