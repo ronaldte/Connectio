@@ -24,5 +24,6 @@ namespace Connectio.Models
 
         public List<Tag> Tags { get; set; } = new();
         public List<ApplicationUser> UserMentions { get; set; } = new();
+        public List<PostImage> PostImages { get; set; } = new();
     }
 }
