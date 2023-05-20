@@ -41,6 +41,24 @@ namespace Connectio.Controllers
             return View();
         }
 
+        private async Task<Post> SaveImages(List<IFormFile> images, Post post)
+        {
+            for (int i = 0; i < images.Count; i++)
+            {
+                var fileExtension = Path.GetExtension(images[i].FileName).ToLowerInvariant();
+                var trustedFileNameForFileStorage = Guid.NewGuid().ToString() + fileExtension;
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\pictures", trustedFileNameForFileStorage);
+
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    await images[i].CopyToAsync(stream);
+                }
+
+                post.PostImages.Add(new PostImage() { ImageUrl = trustedFileNameForFileStorage, Order = i });
+            }
+            return post;
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -57,6 +75,12 @@ namespace Connectio.Controllers
                 User = await _userManager.GetUserAsync(User) ?? throw new ArgumentNullException(nameof(User)),
                 Text = post.Text
             };
+
+            var images = new List<IFormFile>() { post.ImageFile1, post.ImageFile2, post.ImageFile3 }
+                .Where(img => img != null)
+                .ToList();
+
+            newPost = await SaveImages(images, newPost);
             
             _postRepository.CreatePost(newPost);
 

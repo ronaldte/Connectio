@@ -46,3 +46,7 @@ function changeTab(event, tab) {
 
     document.getElementById(tab).removeAttribute("hidden");
 }
+function showImageUpload(event) {
+    var images = document.getElementById("new-post-image-upload")
+    images.hidden = !images.hidden
+}
