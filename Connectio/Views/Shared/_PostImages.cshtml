@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ReadPostImageViewModel>
+
+@{
+    var placements = new Dictionary<int, string>()
+    {
+        {1, "first:row-span-4 first:col-span-4"},
+        {2, "first:row-span-4 first:col-span-2 last:row-span-4 last:col-span-2"},
+        {3, "first:row-span-4 first:col-span-2 [&:nth-child(2)]:col-span-2 [&:nth-child(2)]:row-span-2 last:row-span-2 last:col-span-2"}
+    };
+}
+
+<div class="w-full aspect-square grid grid-cols-4 grid-rows-4 rounded-lg overflow-hidden">
+    @foreach (var img in Model)
+    {
+        <img class="object-cover w-full h-full @placements[Model.Count()]" src="~/pictures/@img.ImageUrl" alt="">
+    }
+</div>

@@ -72,6 +72,13 @@
         <!-- Content -->
         <div class="w-full rounded-lg my-4">
             <div class="whitespace-pre-line">@Html.Raw(Model.Text)</div>
+
+            <div class="mt-2">
+                @if (Model.Images.Count() > 0)
+                {
+                    <partial name="_PostImages" model="Model.Images" />
+                }
+            </div>
         </div>
 
         <!-- Footer -->
