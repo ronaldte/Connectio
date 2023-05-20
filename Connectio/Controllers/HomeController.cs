@@ -53,7 +53,7 @@ namespace Connectio.Controllers
                 header = $"{followee.DisplayName}(@{followee.UserName}) commented on";
                 foreach (var comment in followeeComments)
                 {
-                    posts.Add(new ReadPostViewModel(comment.Post) { Header = header, ActivityCreated=comment.Created, Comment=comment, ActivityType=ActivityType.Comment, ActivityUserName=followee.UserName});
+                    posts.Add(new ReadPostViewModel(comment.Post) { Header = header, ActivityCreated=comment.Created, Comment=new ReadCommentViewModel(comment), ActivityType=ActivityType.Comment, ActivityUserName=followee.UserName});
                 }
             }
 

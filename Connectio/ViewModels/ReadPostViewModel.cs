@@ -12,7 +12,7 @@ namespace Connectio.ViewModels
         public DateTime ActivityCreated { get; set; }
         public ReadUserViewModel User { get; set; }
         public string? Header { get; set; } = null;
-        public Comment? Comment { get; set; } = null;
+        public ReadCommentViewModel? Comment { get; set; } = null;
         public ActivityType ActivityType { get; set; }
         public string? ActivityUserName { get; set; }
         public IEnumerable<ReadCommentViewModel>? Comments { get; set; }
