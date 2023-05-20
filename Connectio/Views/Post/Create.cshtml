@@ -9,11 +9,8 @@
 
 <div id="new_post" class="w-full mb-4 rounded-xl bg-white p-5 shadow scroll-mt-16">
     <span asp-validation-for="@Model.Text" class="text-red-500"></span>
-    <div class="flex justify-between">
-        <div class="mr-3">          
-            <partial name="User/_SmallProfilePicture" model="new ReadUserViewModel(await UserManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException())" />
-        </div>
-        <div class="w-full my-auto">
+    <div class="flex justify-start">
+        <div class="w-full">
             <form asp-action="Create" enctype="multipart/form-data">
                 <div>
                     <div class="relative">
@@ -24,7 +21,7 @@
                 <div class="flex justify-between pl-3">
                     <div class="my-auto">
                         <ul class="flex">
-                            <div onclick="showImageUpload()">
+                            <div onclick="showImageUpload()" class="hover:text-gray-400 hover:cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                                 </svg>
@@ -33,11 +30,11 @@
                     </div>
                 </div>
                     
-                <div id="new-post-image-upload" hidden>
+                <div id="new-post-image-upload" class="space-y-2 ml-3" hidden>
                     <p>You can upload up to 3 images per post.</p>
-                    <input type="file" asp-for="@Model.ImageFile1" />
-                    <input type="file" asp-for="@Model.ImageFile2" />
-                    <input type="file" asp-for="@Model.ImageFile3" />
+                    <input id="post-upload-image1" type="file" asp-for="@Model.ImageFile1" accept="image/png, image/jpeg" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-400 file:text-white hover:file:bg-orange-500" onchange="showNextField()" />
+                    <input hidden id="post-upload-image2" type="file" asp-for="@Model.ImageFile2" accept="image/png, image/jpeg" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-400 file:text-white hover:file:bg-orange-500" onchange="showNextField()" />
+                    <input hidden id="post-upload-image3" type="file" asp-for="@Model.ImageFile3" accept="image/png, image/jpeg" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-400 file:text-white hover:file:bg-orange-500" onchange="showNextField()" />
                 </div>
                     
                 <div class="flex justify-end">

@@ -50,3 +50,12 @@ function showImageUpload(event) {
     var images = document.getElementById("new-post-image-upload")
     images.hidden = !images.hidden
 }
+
+function showNextField(event) {
+    var field1 = document.getElementById("post-upload-image1");
+    var field2 = document.getElementById("post-upload-image2");
+    var field3 = document.getElementById("post-upload-image3");
+
+    field2.hidden = (field1.value == "");
+    field3.hidden = (field2.value == "");
+}
