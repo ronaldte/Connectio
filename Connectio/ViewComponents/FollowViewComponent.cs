@@ -20,7 +20,7 @@ namespace Connectio.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(string followingUsername)
         {
             ApplicationUser following = _userRepository.GetUserByUserName(followingUsername)!;
-            ApplicationUser follower = await _userManager.GetUserAsync(UserClaimsPrincipal);
+            ApplicationUser follower = await _userManager.GetUserAsync(UserClaimsPrincipal) ?? throw new UnauthorizedAccessException();
 
             var followViewModel = new DisplayFollowViewModel()
             {

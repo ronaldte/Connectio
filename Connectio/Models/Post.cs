@@ -10,8 +10,8 @@ namespace Connectio.Models
         public string Text { get; set; } = string.Empty;
         public DateTime Created { get; set; }
 
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public string UserId { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
         public List<ApplicationUser> BookmarkedBy { get; set; } = new();
         public List<Bookmark> Bookmarks { get; set; } = new();

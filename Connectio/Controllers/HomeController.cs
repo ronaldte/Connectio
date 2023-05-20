@@ -31,12 +31,12 @@ namespace Connectio.Controllers
                 return NotFound();
             }
 
-            var following = _userRepository.GetUserByUserName(user.UserName).Following;
+            var following = _userRepository.GetUserByUserName(user.UserName!) ?? throw new UnauthorizedAccessException();
 
             var posts = new List<ReadPostViewModel>();
-            foreach(var followee in following)
+            foreach(var followee in following.Following)
             {
-                var followeePosts = _postRepository.GetAllPostsByUser(followee.UserName);
+                var followeePosts = _postRepository.GetAllPostsByUser(followee.UserName!);
                 foreach (var post in followeePosts)
                 {
                     posts.Add(new ReadPostViewModel(post) {ActivityCreated=post.Created, ActivityUserName=followee.UserName});

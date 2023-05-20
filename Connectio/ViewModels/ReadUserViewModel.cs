@@ -22,7 +22,7 @@ namespace Connectio.ViewModels
 
         public ReadUserViewModel(ApplicationUser user)
         {
-            UserName = user.UserName;
+            UserName = user.UserName!;
             DisplayName = user.DisplayName;
             Location = user.Location;
             Url = user.Url;

@@ -3,14 +3,15 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
-    var user = new ReadUserViewModel(await UserManager.GetUserAsync(User));
+    var user = await UserManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
+    var userViewModel = new ReadUserViewModel(user);
 }
 
 <div class="space-y-6">
     <h3 class="text-lg text-gray-500">Update your profile picture</h3>
 
     <div class="rounded-xl">
-        <partial name="User/_LargeProfilePicture" model="user" />
+        <partial name="User/_LargeProfilePicture" model="userViewModel" />
     </div>
 
     <form method="post" enctype="multipart/form-data" asp-controller="User" asp-action="UpdateProfilePicture">

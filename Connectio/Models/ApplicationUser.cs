@@ -5,7 +5,7 @@ namespace Connectio.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public string DisplayName { get; set; }
+        public string DisplayName { get; set; } = null!;
         public string? Location { get; set; }
         public string? Url { get; set; }
         public string? Description { get; set; }
