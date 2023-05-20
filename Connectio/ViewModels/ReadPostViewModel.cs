@@ -16,6 +16,7 @@ namespace Connectio.ViewModels
         public ActivityType ActivityType { get; set; }
         public string? ActivityUserName { get; set; }
         public IEnumerable<ReadCommentViewModel>? Comments { get; set; }
+        public IEnumerable<ReadPostImageViewModel> Images { get; set; }
 
         public ReadPostViewModel(Post post)
         {
@@ -23,6 +24,7 @@ namespace Connectio.ViewModels
             Text = HightlightMentions(post.Text);
             PostCreated = post.Created.TimeSinceCreated();
             User = new ReadUserViewModel(post.User);
+            Images = post.PostImages.Select(i => new ReadPostImageViewModel(i));
         }
 
         private static string HightlightMentions(string text)

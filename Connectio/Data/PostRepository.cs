@@ -20,12 +20,12 @@ namespace Connectio.Data
 
         public IEnumerable<Post> GetAllPosts()
         {
-            return _dbContext.Posts.Include(p => p.User);
+            return _dbContext.Posts.Include(p => p.User).Include(p => p.PostImages);
         }
 
         public IEnumerable<Post> GetAllPostsByUser(string username)
         {
-            return _dbContext.Posts.Where(p => p.User.UserName == username).Include(p => p.User);
+            return _dbContext.Posts.Where(p => p.User.UserName == username).Include(p => p.User).Include(p => p.PostImages);
         }
 
         public Post? GetPostById(int postId)
@@ -36,6 +36,7 @@ namespace Connectio.Data
                 .Include(p => p.LikedBy)
                 .Include(p => p.BookmarkedBy)
                 .Include(p => p.Comments)
+                .Include(p => p.PostImages)
                 .FirstOrDefault();
         }
     }
