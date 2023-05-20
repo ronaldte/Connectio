@@ -155,7 +155,7 @@ namespace Connectio.Data.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Bookmarks");
+                    b.ToTable("Bookmarks", (string)null);
                 });
 
             modelBuilder.Entity("Connectio.Models.Comment", b =>
@@ -188,7 +188,7 @@ namespace Connectio.Data.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("Connectio.Models.Like", b =>
@@ -208,7 +208,7 @@ namespace Connectio.Data.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Likes");
+                    b.ToTable("Likes", (string)null);
                 });
 
             modelBuilder.Entity("Connectio.Models.Post", b =>
@@ -234,7 +234,7 @@ namespace Connectio.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("Connectio.Models.PostImage", b =>
@@ -259,7 +259,7 @@ namespace Connectio.Data.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("PostImages");
+                    b.ToTable("PostImages", (string)null);
                 });
 
             modelBuilder.Entity("Connectio.Models.Tag", b =>
@@ -276,7 +276,7 @@ namespace Connectio.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tags", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -428,7 +428,7 @@ namespace Connectio.Data.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("PostTagMention");
+                    b.ToTable("PostTagMention", (string)null);
                 });
 
             modelBuilder.Entity("PostUserMention", b =>
@@ -443,7 +443,7 @@ namespace Connectio.Data.Migrations
 
                     b.HasIndex("UserMentionsId");
 
-                    b.ToTable("PostUserMention");
+                    b.ToTable("PostUserMention", (string)null);
                 });
 
             modelBuilder.Entity("ApplicationUserApplicationUser", b =>
