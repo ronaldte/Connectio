@@ -6,7 +6,6 @@ namespace Connectio.Views.Shared
     {
         public static string Home => "Home";
         public static string Explore => "Explore";
-        public static string Notifications => "Notifications";
         public static string Messages => "Messages";
         public static string Bookmarks => "Bookmarks";
         public static string Profile => "Profile";
@@ -14,7 +13,6 @@ namespace Connectio.Views.Shared
 
         public static string HomeActivePage(ViewContext viewContext) => ActiveNavigationPageClass(viewContext, Home);
         public static string ExploreActivePage(ViewContext viewContext) => ActiveNavigationPageClass(viewContext, Explore);
-        public static string NotificationsActivePage(ViewContext viewContext) => ActiveNavigationPageClass(viewContext, Notifications);
         public static string MessagesActivePage(ViewContext viewContext) => ActiveNavigationPageClass(viewContext, Messages);
         public static string BookmarksActivePage(ViewContext viewContext) => ActiveNavigationPageClass(viewContext, Bookmarks);
         public static string ProfileActivePage(ViewContext viewContext) => ActiveNavigationPageClass(viewContext, Profile);
