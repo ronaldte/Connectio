@@ -579,6 +579,10 @@ html {
   top: 0px;
 }
 
+.top-5 {
+  top: 1.25rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -774,6 +778,10 @@ html {
   width: 275px;
 }
 
+.w-\[350px\] {
+  width: 350px;
+}
+
 .w-\[50\%\] {
   width: 50%;
 }
@@ -784,6 +792,15 @@ html {
 
 .w-full {
   width: 100%;
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.max-w-\[350px\] {
+  max-width: 350px;
 }
 
 .cursor-not-allowed {
@@ -1526,6 +1543,11 @@ html {
   font-weight: 700;
 }
 
+.hover\:text-gray-400:hover {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
 .hover\:text-gray-600:hover {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
@@ -1539,11 +1561,6 @@ html {
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.hover\:text-gray-400:hover {
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {

@@ -151,7 +151,14 @@
             </div>
         </div>
 
-        <div></div>
+        <div">
+            <div class="fixed mt-2">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @await Component.InvokeAsync("Trend")
+                }
+            </div>
+        </div>
     </div>
 
     @RenderSection("Scripts", required: false)
