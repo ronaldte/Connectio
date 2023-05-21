@@ -1,0 +1,11 @@
+﻿@model ReadTrendViewModel
+
+<partial name="_Divider" model="@("Trending topics")" />
+@foreach(var tag in Model.TrendingTags){
+    <partial name="_TagCard" model="tag" />
+}
+
+<partial name="_Divider" model="@("People to follow")" />
+@foreach (var user in Model.PeopleToFollow){
+    <partial name="_ShortUserProfile" model="user" />
+}
