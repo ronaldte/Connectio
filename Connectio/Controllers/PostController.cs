@@ -30,7 +30,7 @@ namespace Connectio.Controllers
 
             var postViewModel = new ReadPostViewModel(post)
             {
-                Comments = post.Comments.Select(c => new ReadCommentViewModel(c)).OrderByDescending(c => c.Created)
+                Comments = post.Comments.OrderByDescending(c => c.Created).Select(c => new ReadCommentViewModel(c))
             };
             return View(postViewModel);
         }
