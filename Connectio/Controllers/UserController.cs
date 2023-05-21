@@ -25,18 +25,16 @@ namespace Connectio.Controllers
         public IActionResult Index(string username)
         {
             var user = _userRepository.GetUserByUserName(username);
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            List<ReadPostViewModel> posts = new();
-            var postsFromDb = _postRepository.GetAllPostsByUser(username);
-            foreach(var post in postsFromDb)
-            {
-                posts.Add(new ReadPostViewModel(post));
-            }
-            
+            var posts = _postRepository
+                .GetAllPostsByUser(username)
+                .OrderByDescending(p => p.Created)
+                .Select(p => new ReadPostViewModel(p));
+
             var viewModel = new ReadUserViewModel(user, posts);
             return View(viewModel);
         }

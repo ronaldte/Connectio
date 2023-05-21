@@ -12,7 +12,7 @@ namespace Connectio.ViewModels
         public bool Protected { get; set; } = false;
         public bool Verified { get; set; } = false;
         public string Created { get; set; } = string.Empty;
-        public List<ReadPostViewModel> Posts { get; set; } = new();
+        public IEnumerable<ReadPostViewModel> Posts { get; set; } = Enumerable.Empty<ReadPostViewModel>();
         public int FollowersCount { get; set; } = 0;
         public int FollowingCount { get; set; } = 0;
         public bool HasDefaultProfilePicture { get; set; } = true;
@@ -44,7 +44,7 @@ namespace Connectio.ViewModels
                 ProfilePictureUrl = user.ProfilePictureUrl;
             }
         }
-        public ReadUserViewModel(ApplicationUser user, List<ReadPostViewModel> posts) : this(user)
+        public ReadUserViewModel(ApplicationUser user, IEnumerable<ReadPostViewModel> posts) : this(user)
         {
             Posts = posts;
         }
