@@ -30,5 +30,7 @@ namespace Connectio.Models
         public List<ApplicationUser> Following { get; } = new();
 
         public List<Post> PostMentions { get; } = new();
+
+        public List<Conversation> Conversations { get; set; } = new();
     }
 }
