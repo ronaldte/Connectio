@@ -1,0 +1,26 @@
+﻿@model CreateConversationViewModel
+
+@{
+    ViewData["Title"] = "Create new message";
+    ViewData["ActiveNavigationPage"] = ActiveNavigationPage.Messages;
+}
+
+
+<form asp-controller="Conversation" asp-action="Create" method="post">
+    <div class="space-y-2">
+        <div asp-validation-summary="ModelOnly" class="text-red-500" role="alert"></div>
+        <div>
+            <label asp-for="@Model.ToUser"></label>
+            <input asp-for="@Model.ToUser" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Username to message" />
+            <span asp-validation-for="@Model.ToUser" class="text-red-500"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.MessageText"></label>
+            <textarea asp-for="@Model.MessageText" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="Text message for user"></textarea>
+            <span asp-validation-for="@Model.MessageText" class="text-red-500"></span>
+        </div>
+        <div class="flex justify-end">
+            <button id="login-submit" type="submit" class="rounded-full bg-orange-400 px-3 py-2 w-32 font-semibold text-white hover:bg-orange-500">Send</button>
+        </div>
+    </div>
+</form>
