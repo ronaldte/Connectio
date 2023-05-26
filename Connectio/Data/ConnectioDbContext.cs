@@ -17,6 +17,7 @@ namespace Connectio.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<PostImage> PostImages { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -56,6 +57,13 @@ namespace Connectio.Data
                 .HasMany(e => e.UserMentions)
                 .WithMany(e => e.PostMentions)
                 .UsingEntity("PostUserMention");
+
+            builder.Entity<Conversation>()
+                .HasMany(e => e.Messages)
+                .WithOne(e => e.Conversation);
+
+            builder.Entity<Message>()
+                .Property(e => e.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
         }
     }
 }
