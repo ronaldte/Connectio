@@ -55,9 +55,26 @@ namespace Connectio.Controllers
             return RedirectToAction("List");
         }
         
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            return View();
+            var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
+            var conversations = _conversationRepository.GetUserConversations(user);
+            
+            var viewModel = new List<DisplayConversationListViewModel>();
+            foreach(var conversation in conversations)
+            {
+                var conversationViewModel = new DisplayConversationListViewModel()
+                {
+                    Id = conversation.Id,
+                    IsPrivate = conversation.IsPrivate,
+                    Participants = conversation.Participants.Where(p => p != user).Select(p => new ReadUserViewModel(p)).ToList(),
+                    LastMessage = _conversationRepository.GetMessages(conversation.Id, 1)!.First()
+                };
+
+                viewModel.Add(conversationViewModel);
+            }
+            
+            return View(viewModel);
         }
     }
 }
