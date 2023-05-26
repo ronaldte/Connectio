@@ -37,6 +37,7 @@ builder.Services.AddScoped<IReactionRepository, ReactionRepository>();
 builder.Services.AddScoped<IMentionRepository, MentionRepository>();
 builder.Services.AddScoped<ISearchRepository, SearchRepository>();
 builder.Services.AddScoped<ITrendRepository, TrendRepository>();
+builder.Services.AddScoped<IConversationRepository, ConversationRepository>();
 
 var app = builder.Build();
 
