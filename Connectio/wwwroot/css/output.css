@@ -579,10 +579,6 @@ html {
   top: 0px;
 }
 
-.top-5 {
-  top: 1.25rem;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -778,10 +774,6 @@ html {
   width: 275px;
 }
 
-.w-\[350px\] {
-  width: 350px;
-}
-
 .w-\[50\%\] {
   width: 50%;
 }
@@ -792,15 +784,6 @@ html {
 
 .w-full {
   width: 100%;
-}
-
-.w-fit {
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
-.max-w-\[350px\] {
-  max-width: 350px;
 }
 
 .cursor-not-allowed {

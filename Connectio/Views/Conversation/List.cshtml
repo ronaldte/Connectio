@@ -1,0 +1,37 @@
+﻿@model IEnumerable<DisplayConversationListViewModel>
+
+@inject UserManager<ApplicationUser> UserManager
+
+<div class="space-y-2">
+    @foreach(var conversation in Model)
+    {
+        <a href="#">
+            <article class="w-full mb-3 rounded-xl bg-white p-5 shadow hover:bg-slate-100">
+                <div class="flex">
+                    @if (conversation.IsPrivate)
+                    {
+                        <div class="mr-3">
+                            <partial name="User/_SmallProfilePicture" model=@conversation.Participants.First() />
+                        </div>
+                    }
+                    <div>
+                        <span class="font-semibold">@conversation.Participants.First().DisplayName</span>
+                        <div class="flex">
+                            <span class="font-semibold">
+                                @if (conversation.LastMessage.CreatedBy.UserName == @UserManager.GetUserName(User))
+                                {
+                                    <span>You:&nbsp;</span>
+                                }
+                                else
+                                {
+                                    <span>@conversation.LastMessage.CreatedBy.UserName:&nbsp;</span>
+                                }
+                            </span>
+                            <p>@conversation.LastMessage.Text</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+    }
+</div>
