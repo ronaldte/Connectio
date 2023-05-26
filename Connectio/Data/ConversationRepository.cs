@@ -1,4 +1,5 @@
 ﻿using Connectio.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Connectio.Data
 {
@@ -23,6 +24,18 @@ namespace Connectio.Data
         public void CreateMessage(Message message)
         {
             _dbContext.Messages.Add(message);
+        }
+
+        public IEnumerable<Conversation> GetUserConversations(ApplicationUser user)
+        {
+            return _dbContext.Conversations.Where(c => c.Participants.Contains(user)).Include(c => c.Participants).ToList();
+        }
+
+        public IEnumerable<Message>? GetMessages(int conversationId, int count = 10)
+        {
+            var conversation = _dbContext.Conversations.Where(c => c.Id == conversationId).Include(c => c.Messages).FirstOrDefault();
+
+            return conversation?.Messages.Take(count).ToList();
         }
     }
 }
