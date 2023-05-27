@@ -8,6 +8,7 @@ namespace Connectio.Data
         void CreateConversation(Conversation conversation);
         void CreateMessage(Message message);
         IEnumerable<Conversation> GetUserConversations(ApplicationUser user);
-        IEnumerable<Message>? GetMessages(int conversationId, int count = 10);
+        IEnumerable<Message> GetMessages(int conversationId, int count = 10);
+        bool ConversationExists (int conversationId);
     }
 }

@@ -76,5 +76,34 @@ namespace Connectio.Controllers
             
             return View(viewModel);
         }
+
+        public async Task<IActionResult> Read(int conversationId)
+        {
+            if (!_conversationRepository.ConversationExists(conversationId))
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
+
+            var conversations = _conversationRepository.GetUserConversations(user);
+            if(!conversations.Any(c => c.Id == conversationId))
+            {
+                return Unauthorized();
+            }
+
+            var messages = _conversationRepository.GetMessages(conversationId);
+
+            var conversation = conversations.Where(c => c.Id == conversationId).First();
+            var viewModel = new DisplayConversationViewModel()
+            {
+                Id = conversation.Id,
+                IsPrivate = conversation.IsPrivate,
+                Participants = conversation.Participants.Where(p => p != user).Select(p => new ReadUserViewModel(p)).ToList(),
+                Messages = messages.Select(m => new ReadMessageViewModel(m)).ToList()
+            };
+            
+            return View(viewModel);
+        }
     }
 }

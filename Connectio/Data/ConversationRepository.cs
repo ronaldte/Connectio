@@ -31,11 +31,20 @@ namespace Connectio.Data
             return _dbContext.Conversations.Where(c => c.Participants.Contains(user)).Include(c => c.Participants).ToList();
         }
 
-        public IEnumerable<Message>? GetMessages(int conversationId, int count = 10)
+        public IEnumerable<Message> GetMessages(int conversationId, int count = 10)
         {
-            var conversation = _dbContext.Conversations.Where(c => c.Id == conversationId).Include(c => c.Messages).FirstOrDefault();
+            var conversation = _dbContext.Conversations
+                .Where(c => c.Id == conversationId)
+                .Include(c => c.Messages)
+                .ThenInclude(m => m.CreatedBy)
+                .First();
 
-            return conversation?.Messages.Take(count).ToList();
+            return conversation.Messages.Take(count).ToList();
+        }
+
+        public bool ConversationExists(int conversationId)
+        {
+            return _dbContext.Conversations.Any(c => c.Id == conversationId);
         }
     }
 }
