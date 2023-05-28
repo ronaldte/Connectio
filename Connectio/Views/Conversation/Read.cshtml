@@ -2,6 +2,11 @@
 
 @inject UserManager<ApplicationUser> UserManager
 
+@{
+    ViewData["Title"] = "Conversation";
+    ViewData["ActiveNavigationPage"] = ActiveNavigationPage.Messages;
+}
+
 @foreach(var msg in Model.Messages){
     @if (msg.CreatedBy.UserName == UserManager.GetUserName(User))
     {
