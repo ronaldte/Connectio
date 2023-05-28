@@ -27,7 +27,13 @@
                                     <span>@conversation.LastMessage.CreatedBy.UserName:&nbsp;</span>
                                 }
                             </span>
-                            <p>@conversation.LastMessage.Text</p>
+                            @if(@conversation.LastMessage.Text.Length > 50)
+                            {
+                                <span>@conversation.LastMessage.Text.Substring(0, 50) ...</span>
+                            }else
+                            {
+                                <span>@conversation.LastMessage.Text</span>
+                            }
                         </div>
                     </div>
                 </div>
