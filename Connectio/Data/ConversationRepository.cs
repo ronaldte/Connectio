@@ -39,7 +39,7 @@ namespace Connectio.Data
                 .ThenInclude(m => m.CreatedBy)
                 .First();
 
-            return conversation.Messages.Take(count).ToList();
+            return conversation.Messages.TakeLast(count).ToList();
         }
 
         public bool ConversationExists(int conversationId)
