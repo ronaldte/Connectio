@@ -579,6 +579,10 @@ html {
   top: 0px;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -686,6 +690,22 @@ html {
   margin-top: 1.25rem;
 }
 
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.mb-28 {
+  margin-bottom: 7rem;
+}
+
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
+}
+
 .block {
   display: block;
 }
@@ -730,8 +750,36 @@ html {
   height: 100vh;
 }
 
+.h-24 {
+  height: 6rem;
+}
+
+.h-\[25px\] {
+  height: 25px;
+}
+
+.max-h-\[16px\] {
+  max-height: 16px;
+}
+
+.max-h-\[25px\] {
+  max-height: 25px;
+}
+
+.max-h-\[30px\] {
+  max-height: 30px;
+}
+
 .min-h-screen {
   min-height: 100vh;
+}
+
+.min-h-\[25px\] {
+  min-height: 25px;
+}
+
+.min-h-\[16px\] {
+  min-height: 16px;
 }
 
 .w-28 {
@@ -782,8 +830,61 @@ html {
   width: 60%;
 }
 
+.w-\[75\%\] {
+  width: 75%;
+}
+
 .w-full {
   width: 100%;
+}
+
+.w-24 {
+  width: 6rem;
+}
+
+.w-\[25px\] {
+  width: 25px;
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.w-\[500px\] {
+  width: 500px;
+}
+
+.w-\[683px\] {
+  width: 683px;
+}
+
+.w-\[583px\] {
+  width: 583px;
+}
+
+.min-w-\[25px\] {
+  min-width: 25px;
+}
+
+.min-w-\[16px\] {
+  min-width: 16px;
+}
+
+.max-w-\[75\%\] {
+  max-width: 75%;
+}
+
+.max-w-\[16px\] {
+  max-width: 16px;
+}
+
+.max-w-\[25px\] {
+  max-width: 25px;
+}
+
+.max-w-\[30px\] {
+  max-width: 30px;
 }
 
 .cursor-not-allowed {
@@ -820,6 +921,10 @@ html {
 
 .items-start {
   align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
 }
 
 .items-center {
@@ -874,6 +979,14 @@ html {
   overflow: hidden;
 }
 
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
 .whitespace-pre-line {
   white-space: pre-line;
 }
@@ -894,6 +1007,14 @@ html {
   border-radius: 0.75rem;
 }
 
+.rounded-2xl {
+  border-radius: 1rem;
+}
+
+.rounded-3xl {
+  border-radius: 1.5rem;
+}
+
 .rounded-l-lg {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -907,6 +1028,14 @@ html {
 .rounded-t-lg {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
+}
+
+.rounded-br-none {
+  border-bottom-right-radius: 0px;
+}
+
+.rounded-bl-none {
+  border-bottom-left-radius: 0px;
 }
 
 .border {
@@ -935,6 +1064,10 @@ html {
 
 .border-t {
   border-top-width: 1px;
+}
+
+.border-t-2 {
+  border-top-width: 2px;
 }
 
 .border-solid {
@@ -1018,6 +1151,21 @@ html {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-red-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
+}
+
 .bg-no-repeat {
   background-repeat: no-repeat;
 }
@@ -1025,6 +1173,11 @@ html {
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.object-fill {
+  -o-object-fit: fill;
+     object-fit: fill;
 }
 
 .p-12 {
@@ -1105,6 +1258,11 @@ html {
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 .pb-2 {
@@ -1595,6 +1753,14 @@ html {
   height: 50px;
 }
 
+.\[\&\>\*\]\:h-\[25px\]>* {
+  height: 25px;
+}
+
+.\[\&\>\*\]\:h-\[20px\]>* {
+  height: 20px;
+}
+
 .\[\&\>\*\]\:w-\[150px\]>* {
   width: 150px;
 }
@@ -1605,6 +1771,14 @@ html {
 
 .\[\&\>\*\]\:w-full>* {
   width: 100%;
+}
+
+.\[\&\>\*\]\:w-\[25px\]>* {
+  width: 25px;
+}
+
+.\[\&\>\*\]\:w-\[20px\]>* {
+  width: 20px;
 }
 
 .\[\&\>\*\]\:rounded-lg>* {
