@@ -3,3 +3,15 @@
 @foreach(var msg in Model.Messages){
     <p>@msg.Text</p>
 }
+
+<div>
+    <form asp-controller="Conversation" asp-action="Send">
+        <input name="ConversationId" hidden value="@Model.Id">
+        <input name="MessageText" id="send-message-input" class="w-full p-3 mb-2 focus:outline-0" type="text" placeholder="Start typing..." required>
+        <div class="flex justify-between pl-3">
+            <div>
+                <button id="send-message-button" type="submit" class="rounded-full bg-orange-400 px-3 py-2 w-32 font-semibold text-white hover:bg-orange-500">Post</button>
+            </div>
+        </div>
+    </form>
+</div>

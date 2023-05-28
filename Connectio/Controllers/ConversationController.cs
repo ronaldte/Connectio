@@ -105,5 +105,36 @@ namespace Connectio.Controllers
             
             return View(viewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Send(CreateMessageViewModel message)
+        {
+            // Prevent manually altering HTML Form in view.
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("List");
+            }
+
+            if (!_conversationRepository.ConversationExists(message.ConversationId))
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
+
+            var conversations = _conversationRepository.GetUserConversations(user);
+            if (!conversations.Any(c => c.Id == message.ConversationId))
+            {
+                return Unauthorized();
+            }
+
+            var conversation = conversations.Where(c => c.Id == message.ConversationId).First();
+            var newMessage = new Message() { Text = message.MessageText, CreatedBy = user, Conversation=conversation};
+
+            _conversationRepository.CreateMessage(newMessage);
+            _conversationRepository.SaveChanges();
+
+            return RedirectToAction("Read", new { conversationId = message.ConversationId });
+        }
     }
 }
