@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Connectio.Areas.Identity;
 using Connectio.Data;
 using Connectio.Models;
+using Connectio.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,8 @@ builder.Services.AddScoped<ISearchRepository, SearchRepository>();
 builder.Services.AddScoped<ITrendRepository, TrendRepository>();
 builder.Services.AddScoped<IConversationRepository, ConversationRepository>();
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 
@@ -70,5 +73,6 @@ app.MapControllerRoute(
     pattern: "{controller=Explore}/{action=Index}"
 );
 app.MapRazorPages();
+app.MapHub<MessageHub>("/messageHub");
 
 app.Run();
