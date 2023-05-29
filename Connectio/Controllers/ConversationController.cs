@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.Controllers
 {
+    /// <summary>
+    /// Conversation controller manages messages between two users.
+    /// </summary>
     [Authorize]
     public class ConversationController : Controller
     {
@@ -21,11 +24,46 @@ namespace Connectio.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Create()
+        /// <summary>
+        /// Displays view for creating new conversation or conversation thread if such exists.
+        /// </summary>
+        /// <param name="username">Username of user to create new conversation with.</param>
+        /// <returns>View for new conversation message or conversation thread if such exists.</returns>
+        /// <exception cref="UnauthorizedAccessException">User should be logged in to message someone.</exception>
+        public async Task<IActionResult> Create(string? username)
         {
-            return View();
+            if (string.IsNullOrEmpty(username))
+            {
+                return View();
+            }
+
+            var userFrom = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
+
+            var userToMessage = _userRepository.GetUserByUserName(username);
+            if(userToMessage is not null)
+            {
+                var existingConversation = _conversationRepository.GetConversation(userFrom, userToMessage);
+                if (existingConversation is not null)
+                {
+                    return RedirectToAction("Read", new { conversationId = existingConversation.Id });
+                }
+            }
+
+            var conversation = new CreateConversationViewModel() { ToUser = username };
+            if(userToMessage is null)
+            {
+                ModelState.AddModelError(nameof(conversation.ToUser), "This user does not exist");
+            }
+
+            return View(conversation);
         }
 
+        /// <summary>
+        /// Create new conversation with user with provided first message.
+        /// </summary>
+        /// <param name="conversation">Model representing new covnersation</param>
+        /// <returns>Newly created conversation thread with user with provided first message.</returns>
+        /// <exception cref="UnauthorizedAccessException">User should be logged in to create conversation with user.</exception>
         [HttpPost]
         public async Task<IActionResult> Create(CreateConversationViewModel conversation)
         {
@@ -52,9 +90,14 @@ namespace Connectio.Controllers
             _conversationRepository.CreateMessage(newMessage);
             _conversationRepository.SaveChanges();
 
-            return RedirectToAction("List");
+            return RedirectToAction("Read", new {conversationId = newConversation.Id});
         }
         
+        /// <summary>
+        /// Displays view with all conversation logged in user is participating in.
+        /// </summary>
+        /// <returns>View with list of all conversation view models</returns>
+        /// <exception cref="UnauthorizedAccessException">User should be logged in to view conversations.</exception>
         public async Task<IActionResult> List()
         {
             var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
@@ -77,6 +120,12 @@ namespace Connectio.Controllers
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Displays conversation thread with messages of given conversation.
+        /// </summary>
+        /// <param name="conversationId">ID of conversation to display.</param>
+        /// <returns>View with list of last 10 messages.</returns>
+        /// <exception cref="UnauthorizedAccessException">User should be logged in to read a conversation.</exception>
         public async Task<IActionResult> Read(int conversationId)
         {
             if (!_conversationRepository.ConversationExists(conversationId))
@@ -106,6 +155,12 @@ namespace Connectio.Controllers
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Creates new message and posts it into a conversation thread.
+        /// </summary>
+        /// <param name="message">ViewModel for new message.</param>
+        /// <returns>Redirection to conversation thread with newly created message.</returns>
+        /// <exception cref="UnauthorizedAccessException">User should be logged in to send messages.</exception>
         [HttpPost]
         public async Task<IActionResult> Send(CreateMessageViewModel message)
         {

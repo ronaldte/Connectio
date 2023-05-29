@@ -46,5 +46,13 @@ namespace Connectio.Data
         {
             return _dbContext.Conversations.Any(c => c.Id == conversationId);
         }
+
+        public Conversation? GetConversation(ApplicationUser firstUser, ApplicationUser secondUser)
+        {
+            return _dbContext.Conversations
+                .Where(c => c.IsPrivate == true)
+                .Where(c => c.Participants.Contains(firstUser) && c.Participants.Contains(secondUser))
+                .FirstOrDefault();
+        }
     }
 }
