@@ -11,5 +11,6 @@ namespace Connectio.Data
         Conversation? GetConversation(ApplicationUser firstUser, ApplicationUser secondUser);
         IEnumerable<Message> GetMessages(int conversationId, int count = 10);
         bool ConversationExists (int conversationId);
+        IEnumerable<ApplicationUser>? GetParticipants(int conversationId);
     }
 }

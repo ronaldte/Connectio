@@ -54,5 +54,11 @@ namespace Connectio.Data
                 .Where(c => c.Participants.Contains(firstUser) && c.Participants.Contains(secondUser))
                 .FirstOrDefault();
         }
+
+        public IEnumerable<ApplicationUser>? GetParticipants(int conversationId)
+        {
+            var conversation = _dbContext.Conversations.Where(c => c.Id == conversationId).Include(c => c.Participants).FirstOrDefault();
+            return conversation?.Participants;
+        }
     }
 }

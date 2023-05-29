@@ -1,9 +1,11 @@
 ﻿using Connectio.Data;
+using Connectio.Hubs;
 using Connectio.Models;
 using Connectio.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Connectio.Controllers
 {
@@ -16,14 +18,16 @@ namespace Connectio.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IConversationRepository _conversationRepository;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IHubContext<MessageHub> _messageHub;
 
-        public ConversationController(IUserRepository userRepository, IConversationRepository conversationRepository, UserManager<ApplicationUser> userManager)
+        public ConversationController(IUserRepository userRepository, IConversationRepository conversationRepository, UserManager<ApplicationUser> userManager, IHubContext<MessageHub> messageHub)
         {
             _userRepository = userRepository;
             _conversationRepository = conversationRepository;
             _userManager = userManager;
+            _messageHub = messageHub;
         }
-
+        
         /// <summary>
         /// Displays view for creating new conversation or conversation thread if such exists.
         /// </summary>
@@ -89,6 +93,8 @@ namespace Connectio.Controllers
             _conversationRepository.CreateConversation(newConversation);
             _conversationRepository.CreateMessage(newMessage);
             _conversationRepository.SaveChanges();
+
+            await NotifyConversation(newConversation.Id, userFrom, newMessage);
 
             return RedirectToAction("Read", new {conversationId = newConversation.Id});
         }
@@ -189,7 +195,24 @@ namespace Connectio.Controllers
             _conversationRepository.CreateMessage(newMessage);
             _conversationRepository.SaveChanges();
 
+            await NotifyConversation(conversation.Id, user, newMessage);
+
             return RedirectToAction("Read", new { conversationId = message.ConversationId });
+        }
+
+        /// <summary>
+        /// Sends message from user to all participants in conversation except user who sent it.
+        /// </summary>
+        /// <param name="conversationId">Conversation Id to notify participants of.</param>
+        /// <param name="fromUser">User who created the notification.</param>
+        /// <param name="message">Message which was created.</param>
+        private async Task NotifyConversation(int conversationId, ApplicationUser fromUser, Message message)
+        {
+            var conversation = _conversationRepository.GetParticipants(conversationId)!.Where(u => u != fromUser);
+            foreach (var user in conversation)
+            {
+                await _messageHub.Clients.User(user.Id).SendAsync("Notify", fromUser.UserName, message.Text);
+            }
         }
     }
 }
