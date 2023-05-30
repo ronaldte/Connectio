@@ -211,7 +211,7 @@ namespace Connectio.Controllers
             var conversation = _conversationRepository.GetParticipants(conversationId)!.Where(u => u != fromUser);
             foreach (var user in conversation)
             {
-                await _messageHub.Clients.User(user.Id).SendAsync("Notify", fromUser.UserName, message.Text);
+                await _messageHub.Clients.User(user.Id).SendAsync("Notify", fromUser.UserName, message.Text, conversationId);
             }
         }
     }
