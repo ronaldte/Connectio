@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.ViewComponents
 {
+    /// <summary>
+    /// ViewComponent represents if logged in user follows another user with username.
+    /// </summary>
     public class FollowViewComponent : ViewComponent
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -17,6 +20,12 @@ namespace Connectio.ViewComponents
             _userRepository = userRepository;
         }
 
+        /// <summary>
+        /// Display button which states if user is following and can unfollow or user is not following and can follow.
+        /// </summary>
+        /// <param name="followingUsername">Username of user to follow or unfollow.</param>
+        /// <returns>View which enables user to follow or unfollow other users.</returns>
+        /// <exception cref="UnauthorizedAccessException">User must be logged in to follow other users.</exception>
         public async Task<IViewComponentResult> InvokeAsync(string followingUsername)
         {
             ApplicationUser following = _userRepository.GetUserByUserName(followingUsername)!;

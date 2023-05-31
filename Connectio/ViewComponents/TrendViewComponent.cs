@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.ViewComponents
 {
+    /// <summary>
+    /// Trend represents few people user can follow and trending tags to check out.
+    /// </summary>
     public class TrendViewComponent : ViewComponent
     {
         private readonly ITrendRepository _trendRepository;
@@ -17,6 +20,11 @@ namespace Connectio.ViewComponents
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Displays users to follow and tags to checkout in which or whom logged in user may be interested.
+        /// </summary>
+        /// <returns>View containing other users and tags.</returns>
+        /// <exception cref="UnauthorizedAccessException">User must be logged in to see trends.</exception>
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var user = await _userManager.GetUserAsync(UserClaimsPrincipal) ?? throw new UnauthorizedAccessException();

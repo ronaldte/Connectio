@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.ViewComponents
 {
+    /// <summary>
+    /// PostReactions represents bar for user reactions on given post.
+    /// </summary>
     public class PostReactionsViewComponent : ViewComponent
     {
         private readonly IReactionRepository _reactionRepository;
@@ -20,6 +23,11 @@ namespace Connectio.ViewComponents
         }
 
 
+        /// <summary>
+        /// Displays status of reactions on given post.
+        /// </summary>
+        /// <param name="postId">Post for which reactions are gathered.</param>
+        /// <returns>View in which user can react with the post.</returns>
         public async Task<IViewComponentResult> InvokeAsync(int postId)
         {
             var post = _postRepository.GetPostById(postId)!;
@@ -32,6 +40,7 @@ namespace Connectio.ViewComponents
                 BookmarksCount = post.Bookmarks.Count,
             };
 
+            // If user is logged in display if they liked or bookmarked the post
             if (user != null)
             {
                 reactionViewModel.Liked = post.LikedBy.Any(l => l.UserName == user.UserName);
