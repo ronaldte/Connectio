@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Connectio.Data
 {
+    /// <inheritdoc/>
     public class UserRepository : IUserRepository
     {
         private readonly ConnectioDbContext _dbContext;
@@ -11,13 +12,15 @@ namespace Connectio.Data
         {
             _dbContext = dbContext;
         }
-
+        
+        /// <inheritdoc/>
         public void UpdateFollower(ApplicationUser following)
         {
             _dbContext.Users.Update(following);
             _dbContext.SaveChanges();
         }
 
+        /// <inheritdoc/>
         public ApplicationUser? GetUserByUserName(string username)
         {
             return _dbContext.Users
@@ -27,6 +30,7 @@ namespace Connectio.Data
                 .FirstOrDefault();
         }
 
+        /// <inheritdoc/>
         public void UpdateProfilePicture(ApplicationUser user, string? fileName)
         {
             if(fileName == null)
@@ -42,6 +46,8 @@ namespace Connectio.Data
             
             _dbContext.SaveChanges();
         }
+
+        /// <inheritdoc/>
         public void UpdateBannerPicture(ApplicationUser user, string? fileName)
         {
             if (fileName == null)
