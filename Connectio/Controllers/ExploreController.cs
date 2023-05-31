@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.Controllers
 {
+    /// <summary>
+    /// Explore controller manages posts outside your followings.
+    /// </summary>
     public class ExploreController : Controller
     {
         private readonly IPostRepository _postRepository;
@@ -13,6 +16,10 @@ namespace Connectio.Controllers
             _postRepository = postRepository;
         }
 
+        /// <summary>
+        /// Displays all posts on social media.
+        /// </summary>
+        /// <returns>View with list of all posts on social media.</returns>
         public IActionResult Index()
         {
             var posts = _postRepository.GetAllPosts().OrderByDescending(p => p.Created);

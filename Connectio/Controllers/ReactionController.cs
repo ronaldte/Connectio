@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.Controllers
 {
+    /// <summary>
+    /// Reaction controller manages reactions on posts.
+    /// </summary>
     [Authorize]
     public class ReactionController : Controller
     {
@@ -23,6 +26,11 @@ namespace Connectio.Controllers
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Displays all likes on post.
+        /// </summary>
+        /// <param name="postId">Post id to view likes.</param>
+        /// <returns>View containing all users, who liked the post.</returns>
         public IActionResult DisplayPostLikes(int postId)
         {
             var post = _postRepository.GetPostById(postId);
@@ -36,6 +44,10 @@ namespace Connectio.Controllers
             return View(likedBy);
         }
 
+        /// <summary>
+        /// Displays logged in user bookmarks.
+        /// </summary>
+        /// <returns>View with list of all posts bookmarked by logged in user.</returns>
         public async Task<IActionResult> UserBookmarks()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -49,6 +61,11 @@ namespace Connectio.Controllers
             return View(new ReadAllBookmarksViewModel(bookmarks));
         }
 
+        /// <summary>
+        /// Add post to user bookmarks.
+        /// </summary>
+        /// <param name="postId">Post id to be bookmarked.</param>
+        /// <returns>View with all users' bookmarks.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateBookmark(int postId)
@@ -69,6 +86,11 @@ namespace Connectio.Controllers
             return RedirectToAction("UserBookmarks");
         }
 
+        /// <summary>
+        /// Remove post from user bookmarks.
+        /// </summary>
+        /// <param name="postId">Post id to be removed from bookmarks.</param>
+        /// <returns>View with all users' bookmarks.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteBookmark(int postId)
@@ -90,6 +112,11 @@ namespace Connectio.Controllers
             return RedirectToAction("UserBookmarks");
         }
 
+        /// <summary>
+        /// Like a post.
+        /// </summary>
+        /// <param name="postId">Post to be liked.</param>
+        /// <returns>Returns to home screen.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateLike(int postId)
@@ -110,6 +137,11 @@ namespace Connectio.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Remove like from post.
+        /// </summary>
+        /// <param name="postId">Post from which like should be removed.</param>
+        /// <returns>Returns to home screen.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteLike(int postId)
@@ -131,6 +163,11 @@ namespace Connectio.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Displays form for writing new comment.
+        /// </summary>
+        /// <param name="postId">Post id to be commented.</param>
+        /// <returns>View with form for writing new comment.</returns>
         public IActionResult CreateComment(int postId)
         {
             var post = _postRepository.GetPostById(postId);
@@ -142,6 +179,12 @@ namespace Connectio.Controllers
             return View(new DisplayCreateCommentViewModel(post));
         }
 
+        /// <summary>
+        /// Creates new comment on a post.
+        /// </summary>
+        /// <param name="postId">Post id to be commented.</param>
+        /// <param name="newComment">ViewModel for comment to be added.</param>
+        /// <returns>View displaying post with newly added comment.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateComment(int postId, CreateCommentViewModel newComment)
@@ -168,6 +211,12 @@ namespace Connectio.Controllers
             _reactionRepository.CreateComment(comment);
             return RedirectToAction("Index", "Post", new { id = postId });
         }
+
+        /// <summary>
+        /// Displays all posts with given tag.
+        /// </summary>
+        /// <param name="tagName">Tag to be viewed.</param>
+        /// <returns>View containing all posts with given tag.</returns>
         [AllowAnonymous]
         public IActionResult PostsWithTag(string tagName)
         {

@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.Controllers
 {
+    /// <summary>
+    /// Post controller creates and displays posts
+    /// </summary>
     public class PostController : Controller
     {
         private readonly IPostRepository _postRepository;
@@ -20,6 +23,11 @@ namespace Connectio.Controllers
             _mentionRepository = mentionRepository;
         }
 
+        /// <summary>
+        /// Displays post with given id.
+        /// </summary>
+        /// <param name="id">Id of post to display</param>
+        /// <returns>View containing PostViewModel</returns>
         public IActionResult Index(int id)
         {
             var post = _postRepository.GetPostById(id);
@@ -35,30 +43,49 @@ namespace Connectio.Controllers
             return View(postViewModel);
         }
         
+        /// <summary>
+        /// Displays view for new post.
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// Saves given images to wwwroot with GUID names and adds links them to the post.
+        /// </summary>
+        /// <param name="images">List of IFormFiles with images to be saved.</param>
+        /// <param name="post">Post which contains these images.</param>
+        /// <returns>Post model with added images.</returns>
         private async Task<Post> SaveImages(List<IFormFile> images, Post post)
         {
             for (int i = 0; i < images.Count; i++)
             {
+                // Naive method of checking image file extension, generate GUID as image file name and create new path
                 var fileExtension = Path.GetExtension(images[i].FileName).ToLowerInvariant();
                 var trustedFileNameForFileStorage = Guid.NewGuid().ToString() + fileExtension;
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\pictures", trustedFileNameForFileStorage);
 
+                // Store image file to generated path
                 using (var stream = System.IO.File.Create(filePath))
                 {
                     await images[i].CopyToAsync(stream);
                 }
 
+                // Add name of the newly created iamge file to the image
                 post.PostImages.Add(new PostImage() { ImageUrl = trustedFileNameForFileStorage, Order = i });
             }
             return post;
         }
 
+        /// <summary>
+        /// Creates new post.
+        /// </summary>
+        /// <param name="post">ViewModel of post to be saved.</param>
+        /// <returns>View with post.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]

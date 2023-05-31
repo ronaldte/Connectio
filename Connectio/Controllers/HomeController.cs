@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.Controllers
 {
+    /// <summary>
+    /// Home controller manages posts of your followings.
+    /// </summary>
     [Authorize]
     public class HomeController : Controller
     {
@@ -23,6 +26,11 @@ namespace Connectio.Controllers
             _reactionRepository = reactionRepository;
         }
 
+        /// <summary>
+        /// Displays activity of your followings including new posts, likes and comments.
+        /// </summary>
+        /// <returns>View with list of all activity from your followings.</returns>
+        /// <exception cref="UnauthorizedAccessException"></exception>
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);

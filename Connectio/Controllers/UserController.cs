@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Connectio.Controllers
 {
+    /// <summary>
+    /// User contorller manages profile specific items.
+    /// </summary>
     [Authorize]
     public class UserController : Controller
     {
@@ -21,6 +24,11 @@ namespace Connectio.Controllers
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Displays detailed user profile.
+        /// </summary>
+        /// <param name="username">User to be displayed.</param>
+        /// <returns>View with user details and their posts.</returns>
         [AllowAnonymous]
         public IActionResult Index(string username)
         {
@@ -39,6 +47,11 @@ namespace Connectio.Controllers
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Start following new person.
+        /// </summary>
+        /// <param name="followingUsername">Username of user to be followed.</param>
+        /// <returns>View with following user profile.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddFollower(string followingUsername)
@@ -66,6 +79,11 @@ namespace Connectio.Controllers
             return RedirectToAction("Index", "User", new { username = followingUsername});
         }
 
+        /// <summary>
+        /// Stop following a person.
+        /// </summary>
+        /// <param name="followingUsername">username of user to stop following.</param>
+        /// <returns>View with following user profile.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteFollower(string followingUsername)
@@ -93,6 +111,11 @@ namespace Connectio.Controllers
             return RedirectToAction("Index", "User", new { username = followingUsername});
         }
 
+        /// <summary>
+        /// Displays user followers.
+        /// </summary>
+        /// <param name="username">User followers to be displayed.</param>
+        /// <returns>View with all user followers.</returns>
         public IActionResult Followers(string username)
         {
             var user = _userRepository.GetUserByUserName(username);
@@ -104,6 +127,11 @@ namespace Connectio.Controllers
             return View(new DisplayFollowerFollowingViewModel(user, user.Followers));
         }
 
+        /// <summary>
+        /// Displays user followings.
+        /// </summary>
+        /// <param name="username">User followings to be displayed.</param>
+        /// <returns>View with all user followings.</returns>
         public IActionResult Following(string username)
         {
             var user = _userRepository.GetUserByUserName(username);
@@ -115,10 +143,17 @@ namespace Connectio.Controllers
             return View(new DisplayFollowerFollowingViewModel(user, user.Following));
         }
 
+        /// <summary>
+        /// Saves given images to wwwroot with GUID names and adds links them to the post.
+        /// </summary>
+        /// <param name="images">List of IFormFiles with images to be saved.</param>
+        /// <param name="post">Post which contains these images.</param>
+        /// <returns>Post model with added images.</returns>
         private async Task SaveFile(IFormFile file, Action<ApplicationUser, string?> saveFunction)
         {
             var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
 
+            // Naive method of checking image file extension, generate GUID as image file name and create new path
             var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
             var trustedFileNameForFileStorage = Guid.NewGuid().ToString() + fileExtension;
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\pictures", trustedFileNameForFileStorage);
@@ -131,11 +166,20 @@ namespace Connectio.Controllers
             saveFunction(user, trustedFileNameForFileStorage);
         }
 
+        /// <summary>
+        /// Displays view for updating user profile picture.
+        /// </summary>
+        /// <returns>View where user can update or remove their profile picture</returns>
         public IActionResult UpdateProfilePicture()
         {
             return View();
         }
 
+        /// <summary>
+        /// Updates user profile picture.
+        /// </summary>
+        /// <param name="picture">New profile picture.</param>
+        /// <returns>View where user can update or remove their profile picture.</returns>
         [HttpPost]
         public async Task<IActionResult> UpdateProfilePicture(CreateFileViewModel picture)
         {
@@ -149,11 +193,20 @@ namespace Connectio.Controllers
             return RedirectToAction("UpdateProfilePicture");
         }
 
+        /// <summary>
+        /// Displays view for updating of user banner picture.
+        /// </summary>
+        /// <returns>View where user can update or remove their banner picture.</returns>
         public IActionResult UpdateBannerPicture()
         {
             return View();
         }
 
+        /// <summary>
+        /// Updates user baner picture to new uploaded picture.
+        /// </summary>
+        /// <param name="picture">New picture.</param>
+        /// <returns>View where user can update or remove their banner picture</returns>
         [HttpPost]
         public async Task<IActionResult> UpdateBannerPicture(CreateFileViewModel picture)
         {
@@ -167,12 +220,21 @@ namespace Connectio.Controllers
             return RedirectToAction("UpdateBannerPicture");
         }
         
+        /// <summary>
+        /// Removes picture from profile setting it to default value.
+        /// </summary>
+        /// <param name="removeFunction">Function to use for removal of picture.</param>
+        /// <exception cref="UnauthorizedAccessException">Picture can be removed only from logged in user.</exception>
         private async Task RemovePicture(Action<ApplicationUser, string?> removeFunction)
         {
             var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
             removeFunction(user, null);
         }
 
+        /// <summary>
+        /// Removes profile picture returning it to default state.
+        /// </summary>
+        /// <returns>Returns to Update profile View</returns>
         [HttpPost]
         public async Task<IActionResult> RemoveProfilePicture()
         {
@@ -181,6 +243,10 @@ namespace Connectio.Controllers
             return RedirectToAction("UpdateProfilePicture");
         }
 
+        /// <summary>
+        /// Removes banner picture returning it to default state.
+        /// </summary>
+        /// <returns>Returns to Update banner View</returns>
         [HttpPost]
         public async Task<IActionResult> RemoveBannerPicture()
         {
