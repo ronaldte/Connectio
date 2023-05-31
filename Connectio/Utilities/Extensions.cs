@@ -1,7 +1,21 @@
 ﻿namespace Connectio.Utilities
 {
+    /// <summary>
+    /// Extensions class groups extensions method created.
+    /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// Creates short description of how old the entity is.
+        /// </summary>
+        /// <param name="created">DateTime to convert.</param>
+        /// <example>
+        ///     - created 10 minutes ago => 10m
+        ///     - created 3 hours ago => 3h
+        ///     - created few days back returns today-5 days => Day Month
+        ///     - created last year => May 2022
+        /// </example>
+        /// <returns>Transforms DateTime to short version.</returns>
         public static string TimeSinceCreated(this DateTime created)
         {
             var timeDifference = DateTime.UtcNow - created;
