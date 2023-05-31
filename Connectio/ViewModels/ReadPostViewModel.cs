@@ -1,5 +1,5 @@
 ﻿using Connectio.Models;
-using Connectio.Utils;
+using Connectio.Utilities;
 using System.Text.RegularExpressions;
 
 namespace Connectio.ViewModels

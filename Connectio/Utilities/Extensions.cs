@@ -1,4 +1,4 @@
-﻿namespace Connectio.Utils
+﻿namespace Connectio.Utilities
 {
     public static class Extensions
     {

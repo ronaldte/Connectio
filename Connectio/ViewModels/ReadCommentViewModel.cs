@@ -1,5 +1,5 @@
 ﻿using Connectio.Models;
-using Connectio.Utils;
+using Connectio.Utilities;
 
 namespace Connectio.ViewModels
 {
