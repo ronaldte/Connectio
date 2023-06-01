@@ -2,8 +2,14 @@
 
 namespace Connectio.ViewModels
 {
+    /// <summary>
+    /// ReadAllBookmarks model represents list of bookmarked posts.
+    /// </summary>
     public class ReadAllBookmarksViewModel
     {
+        /// <summary>
+        /// Listof bookmarked posts.
+        /// </summary>
         public IEnumerable<ReadPostViewModel> BookmarkedPosts { get; set; }
 
         public ReadAllBookmarksViewModel(List<Bookmark> bookmarks)
