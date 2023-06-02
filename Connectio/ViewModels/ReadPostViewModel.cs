@@ -57,7 +57,7 @@ namespace Connectio.ViewModels
         /// <summary>
         /// List of all comments on the post.
         /// </summary>
-        public IEnumerable<ReadCommentViewModel>? Comments { get; set; }
+        public IEnumerable<ReadCommentViewModel> Comments { get; set; } = new List<ReadCommentViewModel>();
         
         /// <summary>
         /// List of images on the post.
