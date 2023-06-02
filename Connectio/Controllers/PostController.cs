@@ -99,7 +99,7 @@ namespace Connectio.Controllers
             var newPost = new Post()
             {
                 Created = DateTime.UtcNow,
-                User = await _userManager.GetUserAsync(User) ?? throw new ArgumentNullException(nameof(User)),
+                User = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException(),
                 Text = post.Text
             };
 
