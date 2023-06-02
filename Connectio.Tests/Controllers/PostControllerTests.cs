@@ -86,12 +86,11 @@ public class PostControllerTests
 
         // Act
         var result = controller.Index(It.IsAny<int>());
-        var viewResult = result.As<ViewResult>();
-        var model = viewResult.ViewData.Model.As<ReadPostViewModel>();
-
+        
         // Assert            
-        model.Should().BeEquivalentTo(expectedResult);
-        model.Comments.Should().BeEquivalentTo(expectedComments).And.HaveCount(3);
+        result.Should().BeOfType<ViewResult>()
+            .Which.ViewData.Model.Should().BeEquivalentTo(expectedResult).And.BeAssignableTo<ReadPostViewModel>()
+            .Which.Comments.Should().BeEquivalentTo(expectedComments).And.HaveCount(3);
     }
 
     [Fact]
