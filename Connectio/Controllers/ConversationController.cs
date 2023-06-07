@@ -134,12 +134,12 @@ namespace Connectio.Controllers
         /// <exception cref="UnauthorizedAccessException">User should be logged in to read a conversation.</exception>
         public async Task<IActionResult> Read(int conversationId)
         {
+            var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
+            
             if (!_conversationRepository.ConversationExists(conversationId))
             {
                 return NotFound();
             }
-
-            var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
 
             var conversations = _conversationRepository.GetUserConversations(user);
             if(!conversations.Any(c => c.Id == conversationId))
@@ -175,13 +175,14 @@ namespace Connectio.Controllers
             {
                 return RedirectToAction("List");
             }
+            
+            var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
 
             if (!_conversationRepository.ConversationExists(message.ConversationId))
             {
                 return NotFound();
             }
 
-            var user = await _userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
 
             var conversations = _conversationRepository.GetUserConversations(user);
             if (!conversations.Any(c => c.Id == message.ConversationId))
