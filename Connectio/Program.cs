@@ -44,6 +44,7 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
+await DbInitializer.Seed(app);
 
 if (app.Environment.IsDevelopment())
 {
