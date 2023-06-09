@@ -9,7 +9,7 @@
     };
 }
 
-<div class="w-full aspect-square grid grid-cols-4 grid-rows-4 rounded-lg overflow-hidden">
+<div class="w-full aspect-square grid gap-1 grid-cols-4 grid-rows-4 rounded-lg overflow-hidden">
     @foreach (var img in Model)
     {
         <img class="object-cover w-full h-full @placements[Model.Count()]" src="~/pictures/@img.ImageUrl" alt="">
