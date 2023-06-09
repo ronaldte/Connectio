@@ -100,7 +100,7 @@
                                 <partial name="User/_SmallProfilePicture" model="@comment.User" />
                             </div>
                             <div>
-                                <a asp-controller="User" asp-action="Index" asp-route-username="comment.User.UserName" class="hover:underline">
+                                <a asp-controller="User" asp-action="Index" asp-route-username="@comment.User.UserName" class="hover:underline">
                                     <div class="flex items-center">
                                         <span class="font-semibold">@comment.User.DisplayName</span>
                                         @if (comment.User.Verified)
