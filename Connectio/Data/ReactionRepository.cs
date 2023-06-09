@@ -88,7 +88,7 @@ namespace Connectio.Data
         /// <inheritdoc/>
         public IEnumerable<Comment> GetAllUserComments(ApplicationUser user)
         {
-            return _dbContext.Comments.Where(c => c.User == user).Include(c => c.Post).ToList();
+            return _dbContext.Comments.Where(c => c.User == user).Include(c => c.Post).ThenInclude(p => p.User).ToList();
         }
     }
 }
