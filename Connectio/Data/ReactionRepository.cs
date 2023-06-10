@@ -36,7 +36,7 @@ namespace Connectio.Data
         /// <inheritdoc/>
         public List<Bookmark> GetAllBookmarks(ApplicationUser user)
         {
-            return _dbContext.Bookmarks.Where(b => b.User == user).Include(b => b.Post).Include(p => p.Post.User).ToList();
+            return _dbContext.Bookmarks.Where(b => b.User == user).Include(b => b.Post).Include(p => p.Post.User).Include(b => b.Post.PostImages).ToList();
         }
 
         /// <inheritdoc/>
