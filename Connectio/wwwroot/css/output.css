@@ -799,6 +799,10 @@ html {
   width: 24rem;
 }
 
+.w-\[22rem\] {
+  width: 22rem;
+}
+
 .w-\[275px\] {
   width: 275px;
 }
@@ -817,22 +821,6 @@ html {
 
 .w-full {
   width: 100%;
-}
-
-.w-72 {
-  width: 18rem;
-}
-
-.w-80 {
-  width: 20rem;
-}
-
-.w-\[22rem\] {
-  width: 22rem;
-}
-
-.w-\[50px\] {
-  width: 50px;
 }
 
 .min-w-\[50px\] {
@@ -905,14 +893,6 @@ html {
 
 .justify-around {
   justify-content: space-around;
-}
-
-.gap-4 {
-  gap: 1rem;
-}
-
-.gap-2 {
-  gap: 0.5rem;
 }
 
 .gap-1 {
@@ -1671,6 +1651,18 @@ html {
 @media (prefers-color-scheme: dark) {
   .dark\:border {
     border-width: 1px;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .md\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 }
 
