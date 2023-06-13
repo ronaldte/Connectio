@@ -16,5 +16,22 @@ The entire backend is built on the .NET Core platform using C#. The web app is b
 * Search for new users and posts
 * Mark posts with specific topics by adding tags
 
+## Get started
+Generate connection string either from SSMS local one or get a hosted one and update `appsettings.json`
+```JSON
+"ConnectionStrings": {
+	"ConnectioDbContextConnection": "{{ connection string }}"
+}
+```
+Update database though EF Tools - can be done via `.NET CLI` or `Microsoft.EntityFrameworkCore.Tools` from NuGet packages. Depending on tool run, this will update Db to the latest migration
+```
+Update-Database
+```
+Run the application, first start will populate the Db with some dummy data from `/Data/DbInitializer.cs` or can be prevented be removing `await DbInitializer.Seed(app);` from `Program.cs`. All users use same password and @handle to log in e.i.
+```
+username: green
+password: password
+```
+
 ## Notice
 The goal of this application is to learn about new technologies. I would highly advise against the use in production.
